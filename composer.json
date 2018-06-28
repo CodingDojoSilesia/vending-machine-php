@@ -1,0 +1,19 @@
+{
+    "name": "dmazur/vending-machine",
+    "description": "Vending machine kata for Coding Dojo Silesia",
+    "authors": [
+        {
+            "name": "Dawid Mazur",
+            "email": "kontakt@dawidmazur.eu"
+        }
+    ],
+    "require": {},
+    "require-dev": {
+        "phpunit/phpunit": "^7"
+    },
+    "autoload": {
+        "psr-0": {
+            "VendingMachine": ["src", "tests"]
+        }
+    }
+}
