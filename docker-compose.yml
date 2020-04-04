@@ -6,4 +6,4 @@ services:
     volumes:
         - .:/usr/src/app
         - /usr/src/app/vendor
-    command: ["make"]
+    command: ["make", "check"]
