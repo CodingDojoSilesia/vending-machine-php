@@ -1,4 +1,4 @@
-check:	phpunit
+check:	phpunit	phpcs phpstan fix
 
 run:
 	docker-compose run --rm vending_machine bash
@@ -16,5 +16,5 @@ phpcs:
 phpstan:
 	./vendor/bin/phpstan analyse src --level max
 
-php-cs-fixer:
-	./vendor/bin/php-cs-fixer fix ./src --level=psr2 --dry-run
+fix:
+	./vendor/bin/php-cs-fixer fix ./src --dry-run
