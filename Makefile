@@ -17,4 +17,4 @@ phpstan:
 	./vendor/bin/phpstan analyse src --level max
 
 php-cs-fixer:
-	./vendor/bin/php-cs-fixer fix
+	./vendor/bin/php-cs-fixer fix ./src --level=psr2 --dry-run
