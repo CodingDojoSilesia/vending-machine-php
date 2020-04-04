@@ -8,6 +8,6 @@ final class VendingMachine {
 
     public function service(): string
     {
-        return 'no service';
+        return 'service';
     }
 }
