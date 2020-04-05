@@ -6,8 +6,8 @@ namespace VendingMachine;
 
 final class VendingMachine {
 
-    public function service(): string
+    public function execute(string $input): string
     {
-        return 'service';
+        return $input;
     }
 }

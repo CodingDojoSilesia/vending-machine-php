@@ -2,25 +2,23 @@
 
 declare(strict_types=1);
 
-namespace VendingMachine;
+namespace Tests\VendingMachine;
 
+use VendingMachine\VendingMachine;
 use PHPUnit\Framework\TestCase;
 
 final class VendingMachineTest extends TestCase
 {
-    /**
-     * @var VendingMachine
-     */
+    /** @var VendingMachine */
     private $vendingMachine;
 
     public function setUp(): void
     {
-        $vm = new VendingMachine();
-        $this->vendingMachine = $vm;
+        $this->vendingMachine = new VendingMachine();
     }
 
     public function testServiceReturnsNoService(): void
     {
-        $this->assertEquals('service', $this->vendingMachine->service());
+        $this->assertEquals('test', $this->vendingMachine->execute('test'));
     }
 }

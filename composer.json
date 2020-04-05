@@ -16,8 +16,9 @@
         "phpstan/phpstan": "^0.12.18"
     },
     "autoload": {
-        "psr-0": {
-            "VendingMachine": ["src", "tests"]
+        "psr-4": {
+            "VendingMachine\\": "src/",
+            "Tests\\": "tests/"
         }
     }
 }

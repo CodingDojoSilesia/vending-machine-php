@@ -15,7 +15,7 @@ while ($input !== 'exit') {
 
     switch ($input) {
         case 'service':
-            echo $vm->service() . "\n";
+            echo $vm->execute() . "\n";
             break;
     }
 }
