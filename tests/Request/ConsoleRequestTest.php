@@ -19,4 +19,11 @@ class ConsoleRequestTest extends TestCase
     {
         self::assertEquals('GET-B', (new ConsoleRequest('GET-B'))->action());
     }
+
+    public function testShouldThrowInvalidArgumentExceptionWhenActionNameIsInvalid(): void
+    {
+        self::expectException(\InvalidArgumentException::class);
+
+        new ConsoleRequest('test');
+    }
 }

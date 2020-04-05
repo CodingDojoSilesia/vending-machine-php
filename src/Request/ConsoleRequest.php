@@ -1,8 +1,8 @@
 <?php
 
+declare(strict_types=1);
 
 namespace VendingMachine\Request;
-
 
 use VendingMachine\Model\Money;
 
@@ -20,6 +20,8 @@ class ConsoleRequest
 
     public function __construct(string $action)
     {
+        $this->assertAction($action);
+
         $this->action = $action;
     }
 
@@ -28,9 +30,14 @@ class ConsoleRequest
         $this->money[] = $money;
     }
 
-    public function assertAction(string $action)
+    /**
+     * @param string $action
+     */
+    public function assertAction(string $action): void
     {
-
+        if (!preg_match('/GET-[A-C]/', $action)) {
+            throw new \InvalidArgumentException('Invalid action name!');
+        }
     }
 
     public function action(): string 
