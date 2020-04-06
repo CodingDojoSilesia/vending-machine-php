@@ -25,7 +25,10 @@ class ConsoleRequest
         $this->action = $action;
     }
 
-    public function addMoney(Money $money)
+    /**
+     * @param Money $money
+     */
+    public function addMoney(Money $money): void
     {
         $this->money[] = $money;
     }
@@ -43,5 +46,10 @@ class ConsoleRequest
     public function action(): string 
     {
         return $this->action;
+    }
+
+    public function money(): array
+    {
+        return $this->money;
     }
 }

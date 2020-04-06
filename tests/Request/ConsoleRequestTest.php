@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Tests\Request;
 
 use PHPUnit\Framework\TestCase;
-use SebastianBergmann\Environment\Console;
+use VendingMachine\Model\Dime;
 use VendingMachine\Request\ConsoleRequest;
 
 class ConsoleRequestTest extends TestCase
@@ -25,5 +25,13 @@ class ConsoleRequestTest extends TestCase
         self::expectException(\InvalidArgumentException::class);
 
         new ConsoleRequest('test');
+    }
+
+    public function testShouldAddMoneyToRequest(): void
+    {
+        $consoleRequest = new ConsoleRequest('GET-B');
+        $consoleRequest->addMoney(new Dime());
+
+        self::assertEquals([new Dime()], $consoleRequest->money());
     }
 }
