@@ -4,15 +4,19 @@
 namespace VendingMachine\Item;
 
 
-class ItemC
+class ItemC implements Item
 {
+    private const SELECTOR = 'C';
+
     private int $value = 150;
 
-    /**
-     * @return int
-     */
     public function getValue(): int
     {
         return $this->value;
+    }
+
+    public function selector(): string
+    {
+        return self::SELECTOR;
     }
 }
