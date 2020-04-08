@@ -1,22 +1,12 @@
 <?php
 
+declare(strict_types=1);
 
 namespace VendingMachine\Item;
 
-
-class ItemC implements Item
+class ItemC extends Item
 {
-    private const SELECTOR = 'C';
+    protected string $selector = 'C';
 
-    private int $value = 150;
-
-    public function getValue(): int
-    {
-        return $this->value;
-    }
-
-    public function selector(): string
-    {
-        return self::SELECTOR;
-    }
+    protected int $value = 150;
 }

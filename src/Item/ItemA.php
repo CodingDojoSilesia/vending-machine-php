@@ -4,19 +4,9 @@ declare(strict_types=1);
 
 namespace VendingMachine\Item;
 
-class ItemA implements Item
+class ItemA extends Item
 {
-    private const SELECTOR = 'B';
+    protected string $selector = 'A';
 
-    private int $value = 65;
-
-    public function value(): int
-    {
-        return $this->value;
-    }
-
-    public function selector(): string
-    {
-        return self::SELECTOR;
-    }
+    protected int $value = 65;
 }

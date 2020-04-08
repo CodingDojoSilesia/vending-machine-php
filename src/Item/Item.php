@@ -1,10 +1,27 @@
 <?php
 
 
+
 namespace VendingMachine\Item;
 
-
-interface Item
+abstract class Item
 {
-    public function selector(): string;
+    protected string $selector = '';
+
+    protected int $value = 0;
+
+    public function value(): int
+    {
+        return $this->value;
+    }
+
+    public function selector(): string
+    {
+        return $this->selector;
+    }
+
+    public function equalsBySelector(string $selector): bool
+    {
+        return $this->selector === $selector;
+    }
 }
