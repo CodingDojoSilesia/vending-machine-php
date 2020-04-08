@@ -1,14 +1,10 @@
 <?php
 
+declare(strict_types=1);
 
 namespace VendingMachine\Model;
 
-
-class Quarter implements Coin
+class Quarter extends Money implements Coin
 {
-    public function value()
-    {
-        // TODO: Implement getValue() method.
-    }
-
+    protected int $value = 25;
 }

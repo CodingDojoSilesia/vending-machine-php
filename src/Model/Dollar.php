@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace VendingMachine\Model;
 
-class Dollar
+final class Dollar extends Money implements PaperMoney
 {
+    protected int $value = 100;
 
 }

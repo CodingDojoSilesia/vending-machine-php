@@ -6,5 +6,5 @@ namespace VendingMachine\Model;
 
 interface Coin
 {
-    public function value(): int;
+
 }
