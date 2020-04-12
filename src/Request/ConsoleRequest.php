@@ -34,6 +34,14 @@ class ConsoleRequest
     }
 
     /**
+     * @param Money[]
+     */
+    public function setMoney(array $moneys): void
+    {
+        $this->money = $moneys;
+    }
+
+    /**
      * @param string $action
      */
     public function assertAction(string $action): void
