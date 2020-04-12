@@ -6,6 +6,7 @@ namespace VendingMachine\Model;
 
 final class Dollar extends Money implements PaperMoney
 {
-    protected int $value = 100;
+    protected string $shortCode = 'Dollar';
 
+    protected int $value = 100;
 }
