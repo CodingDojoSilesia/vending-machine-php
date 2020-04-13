@@ -5,13 +5,11 @@ declare(strict_types=1);
 namespace VendingMachine\Request;
 
 use VendingMachine\Model\Money;
+use VendingMachine\Model\MoneyCollection;
 
 class ConsoleRequest implements Request
 {
-    /**
-     * @var array Money[]
-     */
-    private array $money = [];
+    private MoneyCollection $moneys;
 
     /**
      * @var string
@@ -23,6 +21,7 @@ class ConsoleRequest implements Request
         $this->assertAction($action);
 
         $this->action = $action;
+        $this->moneys = new MoneyCollection([]);
     }
 
     /**
@@ -30,15 +29,15 @@ class ConsoleRequest implements Request
      */
     public function addMoney(Money $money): void
     {
-        $this->money[] = $money;
+        $this->moneys->addMoney($money);
     }
 
     /**
-     * @param Money[]
+     * @param MoneyCollection $moneys
      */
-    public function setMoney(array $moneys): void
+    public function setMoney(MoneyCollection $moneys): void
     {
-        $this->money = $moneys;
+        $this->moneys = $moneys;
     }
 
     /**
@@ -58,6 +57,11 @@ class ConsoleRequest implements Request
 
     public function money(): array
     {
-        return $this->money;
+        return $this->moneys->money();
+    }
+
+    public function moneyCollection(): MoneyCollection
+    {
+        return $this->moneys;
     }
 }
