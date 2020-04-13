@@ -6,7 +6,7 @@ namespace VendingMachine\Request;
 
 use VendingMachine\Model\Money;
 
-class ConsoleRequest
+class ConsoleRequest implements Request
 {
     /**
      * @var array Money[]
@@ -16,7 +16,7 @@ class ConsoleRequest
     /**
      * @var string
      */
-    private string $action;
+    protected string $action;
 
     public function __construct(string $action)
     {
