@@ -6,6 +6,7 @@ namespace VendingMachine\Util;
 
 use VendingMachine\Model\AvailableMoney;
 use VendingMachine\Model\Money;
+use VendingMachine\Model\MoneyCollection;
 use VendingMachine\Request\ConsoleRequest;
 
 class ConsoleInputParser implements InputParser
@@ -19,7 +20,7 @@ class ConsoleInputParser implements InputParser
 
         $money = $this->filterMoney($parameters);
 
-        $consoleRequest->setMoney($money);
+        $consoleRequest->setMoney(new MoneyCollection($money));
 
         return $consoleRequest;
     }
