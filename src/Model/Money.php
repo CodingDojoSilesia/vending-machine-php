@@ -15,4 +15,9 @@ abstract class Money
     {
         return $this->value;
     }
+
+    public function create(): Money
+    {
+        return new static();
+    }
 }
