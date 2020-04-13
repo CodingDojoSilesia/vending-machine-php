@@ -6,12 +6,14 @@ namespace Tests\Command;
 
 use PHPUnit\Framework\TestCase;
 use VendingMachine\Command\BuyItemCommand;
+use VendingMachine\Coordinator\PaymentCoordinator;
 use VendingMachine\Item\ItemB;
 use VendingMachine\Model\Dollar;
 use VendingMachine\Model\MoneyCollection;
 use VendingMachine\Repository\InMemoryItemRepository;
 use VendingMachine\Request\BuyItemRequest;
 use VendingMachine\Request\ConsoleRequest;
+use VendingMachine\Response\ConsoleResponse;
 
 class BuyItemCommandTest extends TestCase
 {
@@ -20,12 +22,12 @@ class BuyItemCommandTest extends TestCase
         $itemRepository = new InMemoryItemRepository();
         $itemRepository->add(new ItemB());
 
-        $buyItemCommand = new BuyItemCommand($itemRepository);
+        $buyItemCommand = new BuyItemCommand($itemRepository, new PaymentCoordinator(), new ConsoleResponse());
 
         $result = $buyItemCommand->execute(
             new BuyItemRequest(new ItemB(), new MoneyCollection([new Dollar()]))
         );
 
-        self::assertTrue($result);
+        self::assertInstanceOf(ConsoleResponse::class, $result);
     }
 }
