@@ -21,7 +21,12 @@
     },
     "autoload": {
         "psr-4": {
-            "VendingMachine\\": ["src/", "tests/"]
+            "VendingMachine\\": ["src/"]
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "VendingMachine\\": ["tests/"]
         }
     }
 }

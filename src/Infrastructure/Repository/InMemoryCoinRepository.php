@@ -3,9 +3,9 @@ declare(strict_types=1);
 
 namespace VendingMachine\Infrastructure\Repository;
 
-use VendingMachine\Domain\Money\Coin;
-use VendingMachine\Domain\Money\CoinRepository;
-use VendingMachine\Domain\Money\ShortCode;
+use VendingMachine\Domain\Coin\Coin;
+use VendingMachine\Domain\Coin\CoinRepository;
+use VendingMachine\Domain\Coin\ShortCode;
 
 class InMemoryCoinRepository implements CoinRepository
 {

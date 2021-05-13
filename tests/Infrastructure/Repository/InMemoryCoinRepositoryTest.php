@@ -4,11 +4,11 @@ declare(strict_types=1);
 namespace VendingMachine\Infrastructure\Repository;
 
 use PHPUnit\Framework\TestCase;
-use VendingMachine\Domain\Money\Coin;
-use VendingMachine\Domain\Money\CoinRepository;
-use VendingMachine\Domain\Money\Money;
-use VendingMachine\Domain\Money\Quantity;
-use VendingMachine\Domain\Money\ShortCode;
+use VendingMachine\Domain\Coin\Coin;
+use VendingMachine\Domain\Coin\CoinRepository;
+use VendingMachine\Domain\Coin\Money;
+use VendingMachine\Domain\Coin\Quantity;
+use VendingMachine\Domain\Coin\ShortCode;
 
 class InMemoryCoinRepositoryTest extends TestCase
 {
@@ -20,7 +20,6 @@ class InMemoryCoinRepositoryTest extends TestCase
 
         $this->repository = new InMemoryCoinRepository();
     }
-
 
     public function testNotFoundCoin()
     {

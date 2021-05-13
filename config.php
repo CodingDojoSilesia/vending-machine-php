@@ -1,12 +1,14 @@
 <?php
 
-use VendingMachine\Domain\Money\Command\{
+use VendingMachine\Application\Coin\Command\{
     CreateCoin,
-    CreateCoinHandler,
     InsertCoin,
-    InsertCoinHandler,
     ReturnCoin,
-    ReturnCoinHandler
+};
+use VendingMachine\Application\Coin\Handler\{
+    CreateCoinHandler,
+    InsertCoinHandler,
+    ReturnCoinHandler,
 };
 use VendingMachine\Infrastructure\Repository\InMemoryCoinRepository;
 

@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace VendingMachine\Application\Kernel;
 
 use PHPUnit\Framework\TestCase;
-use VendingMachine\Application\ServiceBus\MessageBus;
+use VendingMachine\Application\Bus\MessageBus;
 
 class VendingServiceTest extends TestCase
 {
