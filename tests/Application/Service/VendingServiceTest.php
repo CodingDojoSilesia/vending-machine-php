@@ -5,7 +5,7 @@ namespace VendingMachine\Application\Service;
 
 use PHPUnit\Framework\TestCase;
 use VendingMachine\Application\Kernel\Kernel;
-use VendingMachine\Application\Coin\Command\CreateCoin;
+use VendingMachine\Application\Command\CreateCoin;
 
 class VendingServiceTest extends TestCase
 {

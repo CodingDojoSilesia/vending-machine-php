@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace VendingMachine\Application\Coin\Query;
+namespace VendingMachine\Application\Query;
 
 use VendingMachine\Application\Coin\View\CoinView;
 

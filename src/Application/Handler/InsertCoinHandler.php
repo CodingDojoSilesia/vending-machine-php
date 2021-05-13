@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace VendingMachine\Application\Coin\Handler;
+namespace VendingMachine\Application\Handler;
 
-use VendingMachine\Application\Coin\Command\InsertCoin;
+use VendingMachine\Application\Command\InsertCoin;
 use VendingMachine\Domain\Coin\CoinRepository;
 use VendingMachine\Domain\Coin\Exception\CoinNotFoundException;
 

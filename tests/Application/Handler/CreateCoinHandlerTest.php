@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace VendingMachine\Application\Coin\Handler;
+namespace VendingMachine\Application\Handler;
 
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use VendingMachine\Application\Coin\Command\CreateCoin;
+use VendingMachine\Application\Command\CreateCoin;
 use VendingMachine\Domain\Coin\Coin;
 use VendingMachine\Domain\Coin\CoinRepository;
 use VendingMachine\Domain\Coin\Exception\CoinAlreadyExist;

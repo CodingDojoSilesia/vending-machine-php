@@ -3,8 +3,8 @@
 namespace VendingMachine\Application\Service;
 
 use VendingMachine\Application\Kernel\Kernel;
-use VendingMachine\Application\Coin\Command\CreateCoin;
-use VendingMachine\Application\Coin\Command\InsertCoin;
+use VendingMachine\Application\Command\CreateCoin;
+use VendingMachine\Application\Command\InsertCoin;
 use VendingMachine\Domain\Coin\ShortCode;
 
 class VendingService

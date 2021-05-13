@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace VendingMachine\Application\Coin\Command;
+namespace VendingMachine\Application\Command;
 
 use PHPUnit\Framework\TestCase;
 use VendingMachine\Domain\Coin\Quantity;

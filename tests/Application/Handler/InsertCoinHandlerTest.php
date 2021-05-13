@@ -1,15 +1,14 @@
 <?php
 declare(strict_types=1);
 
-namespace VendingMachine\Application\Coin\Handler;
+namespace VendingMachine\Application\Handler;
 
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use VendingMachine\Application\Coin\Command\InsertCoin;
+use VendingMachine\Application\Command\InsertCoin;
 use VendingMachine\Domain\Coin\Coin;
 use VendingMachine\Domain\Coin\CoinRepository;
 use VendingMachine\Domain\Coin\Exception\CoinNotFoundException;
-use VendingMachine\Domain\Coin\Factory\MoneyFactory;
 use VendingMachine\Domain\Coin\Quantity;
 use VendingMachine\Domain\Coin\ShortCode;
 
