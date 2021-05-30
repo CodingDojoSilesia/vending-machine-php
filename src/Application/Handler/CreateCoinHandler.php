@@ -3,31 +3,31 @@ declare(strict_types=1);
 
 namespace VendingMachine\Application\Handler;
 
-use VendingMachine\Application\Command\CreateCoin;
-use VendingMachine\Domain\Coin\Coin;
-use VendingMachine\Domain\Coin\CoinRepository;
-
-use VendingMachine\Domain\Coin\Exception\CoinAlreadyExist;
+use VendingMachine\Domain\Coin\Command\CreateCoin;
+use VendingMachine\Domain\Coin\Quantity;
+use VendingMachine\Domain\Coin\ShortCode;
+use VendingMachine\Domain\Machine\Exception\MachineNotFoundException;
+use VendingMachine\Domain\Machine\MachineRepository;
 
 final class CreateCoinHandler
 {
-    private CoinRepository $repository;
+    private MachineRepository $repository;
 
-    public function __construct(CoinRepository $repository)
+    public function __construct(MachineRepository $repository)
     {
         $this->repository = $repository;
     }
 
     public function handle(CreateCoin $command): void
     {
-        $coin = $this->repository->findByShortCode($command->getShortCode());
+        $machine = $this->repository->findOne();
 
-        if ($coin instanceof Coin) {
-            throw new CoinAlreadyExist($command->getShortCode());
+        if (!$machine) {
+            throw new MachineNotFoundException();
         }
 
-        $coin = Coin::withData($command->getShortCode(), $command->getQuantity());
+        $machine->createCoin(ShortCode::fromString($command->getShortCode()), Quantity::fromInteger($command->getQuantity()));
 
-        $this->repository->save($coin);
+        $this->repository->save($machine);
     }
 }

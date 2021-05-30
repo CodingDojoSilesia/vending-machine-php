@@ -50,6 +50,21 @@ final class Money
         return new self($this->getAmount() - $money->getAmount(), $this->getCurrency());
     }
 
+    public function multiply(Quantity $quantity): self
+    {
+        return new self($this->getAmount() * $quantity->count(), $this->getCurrency());
+    }
+
+    public function compare(Money $other): int
+    {
+        return $this->getAmount() <=> $other->getAmount();
+    }
+
+    public function lessThan(Money $other): bool
+    {
+        return $this->compare($other) < 0;
+    }
+
     private function validate(int $amount, string $currency): void
     {
         if ($amount < 0) {

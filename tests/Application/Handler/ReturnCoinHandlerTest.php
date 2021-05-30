@@ -5,27 +5,40 @@ namespace VendingMachine\Application\Handler;
 
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use VendingMachine\Application\Command\ReturnCoin;
+use VendingMachine\Domain\Coin\Command\CreateCoin;
+use VendingMachine\Domain\Coin\Command\InsertCoin;
+use VendingMachine\Domain\Coin\Command\ReturnCoin;
 use VendingMachine\Domain\Coin\Coin;
-use VendingMachine\Domain\Coin\CoinRepository;
 use VendingMachine\Domain\Coin\Exception\CoinNotFoundException;
 use VendingMachine\Domain\Coin\Quantity;
 use VendingMachine\Domain\Coin\ShortCode;
+use VendingMachine\Domain\Machine\Exception\MachineNotFoundException;
+use VendingMachine\Domain\Machine\Machine;
+use VendingMachine\Domain\Machine\MachineRepository;
 
 class ReturnCoinHandlerTest extends TestCase
 {
     /**
-     * @var CoinRepository|MockObject
+     * @var MachineRepository|MockObject
      */
-    private CoinRepository    $repository;
-    private ReturnCoinHandler $handler;
+    private MachineRepository $repository;
+    private ReturnCoinHandler $returnCoinHandler;
 
     protected function setUp(): void
     {
         parent::setUp();
 
-        $this->repository = $this->getMockForAbstractClass(CoinRepository::class);
-        $this->handler    = new ReturnCoinHandler($this->repository);
+        $this->repository        = $this->getMockForAbstractClass(MachineRepository::class);
+        $this->returnCoinHandler = new ReturnCoinHandler($this->repository);
+    }
+
+    public function testMachineNotFound()
+    {
+        $this->expectException(MachineNotFoundException::class);
+        $this->repository->method('findOne')->willReturn(null);
+        $shortCode = ShortCode::fromString('D');
+        $quantity  = Quantity::fromInteger(10);
+        $this->returnCoinHandler->handle(ReturnCoin::withData($shortCode->getCode(), $quantity->count()));
     }
 
     public function testCoinNotExists()
@@ -34,20 +47,27 @@ class ReturnCoinHandlerTest extends TestCase
         $this->expectErrorMessage('Coin with shortcode "D" cannot be found.');
         $shortCode = ShortCode::fromString('D');
         $quantity  = Quantity::fromInteger(10);
-        $this->repository->method('findByShortCode')
-            ->with($shortCode)
-            ->willReturn(null);
-
-        $this->handler->handle(ReturnCoin::withData($shortCode->getCode(), $quantity->getValue()));
+        $this->repository->method('findOne')->willReturn(new Machine());
+        $this->returnCoinHandler->handle(ReturnCoin::withData($shortCode->getCode(), $quantity->count()));
     }
 
     public function testReturnCoin()
     {
-        $shortCode = ShortCode::fromString('D');
-        $quantity  = Quantity::fromInteger(10);
-        $coin      = Coin::withData($shortCode, $quantity);
-        $this->repository->method('findByShortCode')->with($shortCode)->willReturn($coin);
-        $this->repository->expects($this->once())->method('save')->with($coin);
-        $this->handler->handle(ReturnCoin::withData($shortCode->getCode(), $quantity->getValue()));
+        $createCoinHandler = new CreateCoinHandler($this->repository);
+        $insertCoinHandler = new InsertCoinHandler($this->repository);
+        $machine           = new Machine();
+        $shortCode         = ShortCode::fromString('D');
+        $quantity          = Quantity::fromInteger(10);
+        $this->repository->method('findOne')->willReturn($machine);
+        $this->repository->expects($this->exactly(3))->method('save')->with($machine);
+        $createCoinHandler->handle(CreateCoin::withData($shortCode->getCode(), $quantity->count()));
+        $insertCoinHandler->handle(InsertCoin::withData($shortCode->getCode(), 5));
+        $this->returnCoinHandler->handle(ReturnCoin::withData($shortCode->getCode(), 3));
+
+        $this->assertCount(1, $machine->getCoins());
+        $this->assertArrayHasKey((string)$shortCode, $machine->getCoins());
+        $coin = $machine->getCoins()[(string)$shortCode];
+        $this->assertInstanceOf(Coin::class, $coin);
+        $this->assertEquals(12, $coin->getQuantity()->count());
     }
 }

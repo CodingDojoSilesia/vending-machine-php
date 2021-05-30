@@ -41,6 +41,6 @@ class CoinWasReturnedTest extends TestCase
     {
         $this->assertInstanceOf(Money::class, $event->getAmount());
         $this->assertInstanceOf(Quantity::class, $event->getQuantity());
-        $this->assertInstanceOf(ShortCode::class, $event->getCode());
+        $this->assertInstanceOf(ShortCode::class, $event->getShortCode());
     }
 }

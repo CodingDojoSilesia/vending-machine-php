@@ -31,7 +31,7 @@ class QuantityTest extends TestCase
      */
     public function testGetter(Quantity $quantity)
     {
-        $this->assertEquals(10, $quantity->getValue());
+        $this->assertEquals(10, $quantity->count());
     }
 
     /**
@@ -41,7 +41,7 @@ class QuantityTest extends TestCase
      */
     public function testAddValue(Quantity $quantity)
     {
-        $this->assertEquals(11, $quantity->add(Quantity::fromInteger(1))->getValue());
+        $this->assertEquals(11, $quantity->add(Quantity::fromInteger(1))->count());
     }
 
     /**
@@ -51,7 +51,7 @@ class QuantityTest extends TestCase
      */
     public function testSubValue(Quantity $quantity)
     {
-        $this->assertEquals(9, $quantity->sub(Quantity::fromInteger(1))->getValue());
+        $this->assertEquals(9, $quantity->sub(Quantity::fromInteger(1))->count());
     }
 
     /**
@@ -63,6 +63,6 @@ class QuantityTest extends TestCase
     {
         $this->expectException(LogicException::class);
         $this->expectExceptionMessage('Coin quantity must not be less than zero.');
-        $quantity->sub(Quantity::fromInteger(11))->getValue();
+        $quantity->sub(Quantity::fromInteger(11))->count();
     }
 }

@@ -4,14 +4,16 @@ declare(strict_types=1);
 namespace VendingMachine\Domain\Coin;
 
 use PHPUnit\Framework\TestCase;
+use VendingMachine\Domain\Coin\Factory\MoneyFactory;
 
 class CoinTest extends TestCase
 {
     public function testCreate(): Coin
     {
         $shortCode = ShortCode::fromString('Q');
+        $amount    = MoneyFactory::fromShortCode($shortCode);
         $quantity  = Quantity::fromInteger(10);
-        $coin      = Coin::withData($shortCode, $quantity);
+        $coin      = Coin::withData($shortCode, $amount, $quantity);
 
         $this->assertInstanceOf(Coin::class, $coin);
 
@@ -33,7 +35,7 @@ class CoinTest extends TestCase
         $this->assertInstanceOf(Quantity::class, $quantity);
         $this->assertEquals('Q', $shortCode->getCode());
         $this->assertEquals(25, $amount->getAmount());
-        $this->assertEquals(10, $quantity->getValue());
+        $this->assertEquals(10, $quantity->count());
     }
 
     /**
@@ -43,8 +45,8 @@ class CoinTest extends TestCase
      */
     public function testInsertCoin(Coin $coin)
     {
-        $coin->insertCoin(Quantity::fromInteger(1));
-        $this->assertEquals(11, $coin->getQuantity()->getValue());
+        $coin->increase(Quantity::fromInteger(1));
+        $this->assertEquals(11, $coin->getQuantity()->count());
     }
 
     /**
@@ -54,7 +56,7 @@ class CoinTest extends TestCase
      */
     public function testReturnCoin(Coin $coin)
     {
-        $coin->returnCoin(Quantity::fromInteger(1));
-        $this->assertEquals(9, $coin->getQuantity()->getValue());
+        $coin->decrease(Quantity::fromInteger(1));
+        $this->assertEquals(9, $coin->getQuantity()->count());
     }
 }

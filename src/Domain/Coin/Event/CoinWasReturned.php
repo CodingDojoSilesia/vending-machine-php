@@ -35,7 +35,7 @@ final class CoinWasReturned
         return $this->quantity;
     }
 
-    public function getCode(): ShortCode
+    public function getShortCode(): ShortCode
     {
         return $this->code;
     }

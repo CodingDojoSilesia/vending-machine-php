@@ -79,6 +79,19 @@ class MoneyTest extends TestCase
      *
      * @depends clone testCreate
      */
+    public function testMultiply(Money $money)
+    {
+        $result = $money->multiply(Quantity::fromInteger(2));
+        $this->assertInstanceOf(Money::class, $result);
+        $this->assertEquals(200, $result->getAmount());
+        $this->assertEquals('USD', $result->getCurrency());
+    }
+
+    /**
+     * @param Money $money
+     *
+     * @depends clone testCreate
+     */
     public function testTrySubGreaterAmount(Money $money)
     {
         $this->expectException(InvalidArgumentException::class);

@@ -3,10 +3,11 @@ declare(strict_types=1);
 
 namespace VendingMachine\Domain\Coin;
 
+use Stringable;
 use InvalidArgumentException;
 use function mb_strtoupper;
 
-final class ShortCode
+final class ShortCode implements Stringable
 {
     public const   VALID_SHORTCODES = [
         'N'   => 5,
@@ -26,6 +27,11 @@ final class ShortCode
     public static function fromString(string $shortCode): self
     {
         return new self($shortCode);
+    }
+
+    public function __toString(): string
+    {
+        return $this->getCode();
     }
 
     public function getCode(): string

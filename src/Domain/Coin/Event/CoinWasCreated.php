@@ -25,6 +25,11 @@ final class CoinWasCreated
         return new self($code, $amount, $quantity);
     }
 
+    public function getShortCode(): ShortCode
+    {
+        return $this->code;
+    }
+
     public function getAmount(): Money
     {
         return $this->amount;
@@ -33,10 +38,5 @@ final class CoinWasCreated
     public function getQuantity(): Quantity
     {
         return $this->quantity;
-    }
-
-    public function getCode(): ShortCode
-    {
-        return $this->code;
     }
 }

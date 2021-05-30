@@ -3,40 +3,32 @@ declare(strict_types=1);
 
 namespace VendingMachine\Domain\Coin\Event;
 
-use VendingMachine\Domain\Coin\Money;
 use VendingMachine\Domain\Coin\Quantity;
 use VendingMachine\Domain\Coin\ShortCode;
 
 final class CoinWasInserted
 {
-    private Money     $amount;
-    private Quantity  $quantity;
     private ShortCode $code;
+    private Quantity  $quantity;
 
-    private function __construct(ShortCode $code, Money $amount, Quantity $quantity)
+    private function __construct(ShortCode $code, Quantity $quantity)
     {
         $this->code     = $code;
-        $this->amount   = $amount;
         $this->quantity = $quantity;
     }
 
-    public static function withData(ShortCode $code, Money $amount, Quantity $quantity): self
+    public static function withData(ShortCode $code, Quantity $quantity): self
     {
-        return new self($code, $amount, $quantity);
+        return new self($code, $quantity);
     }
 
-    public function getAmount(): Money
+    public function getShortCode(): ShortCode
     {
-        return $this->amount;
+        return $this->code;
     }
 
     public function getQuantity(): Quantity
     {
         return $this->quantity;
-    }
-
-    public function getCode(): ShortCode
-    {
-        return $this->code;
     }
 }

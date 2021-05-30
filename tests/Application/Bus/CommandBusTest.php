@@ -7,7 +7,7 @@ use PHPUnit\Framework\TestCase;
 
 class CommandBusTest extends TestCase
 {
-    private MessageBus $commandBus;
+    private CommandBus $commandBus;
 
     protected function setUp(): void
     {

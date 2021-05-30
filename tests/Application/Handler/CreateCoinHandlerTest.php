@@ -5,27 +5,37 @@ namespace VendingMachine\Application\Handler;
 
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use VendingMachine\Application\Command\CreateCoin;
-use VendingMachine\Domain\Coin\Coin;
-use VendingMachine\Domain\Coin\CoinRepository;
+use VendingMachine\Domain\Coin\Command\CreateCoin;
 use VendingMachine\Domain\Coin\Exception\CoinAlreadyExist;
 use VendingMachine\Domain\Coin\Quantity;
 use VendingMachine\Domain\Coin\ShortCode;
+use VendingMachine\Domain\Machine\Exception\MachineNotFoundException;
+use VendingMachine\Domain\Machine\Machine;
+use VendingMachine\Domain\Machine\MachineRepository;
 
 class CreateCoinHandlerTest extends TestCase
 {
     /**
-     * @var CoinRepository|MockObject
+     * @var MachineRepository|MockObject
      */
-    private CoinRepository    $repository;
+    private MachineRepository $repository;
     private CreateCoinHandler $handler;
 
     protected function setUp(): void
     {
         parent::setUp();
 
-        $this->repository = $this->getMockForAbstractClass(CoinRepository::class);
+        $this->repository = $this->getMockForAbstractClass(MachineRepository::class);
         $this->handler    = new CreateCoinHandler($this->repository);
+    }
+
+    public function testMachineNotFound()
+    {
+        $this->expectException(MachineNotFoundException::class);
+        $this->repository->method('findOne')->willReturn(null);
+        $shortCode = ShortCode::fromString('D');
+        $quantity  = Quantity::fromInteger(10);
+        $this->handler->handle(CreateCoin::withData($shortCode->getCode(), $quantity->count()));
     }
 
     public function testCoinExist()
@@ -34,19 +44,18 @@ class CreateCoinHandlerTest extends TestCase
         $this->expectErrorMessage('Coin with shortcode "D" already exists.');
         $shortCode = ShortCode::fromString('D');
         $quantity  = Quantity::fromInteger(10);
-        $this->repository->method('findByShortCode')
-            ->with($shortCode)
-            ->willReturn(Coin::withData($shortCode, $quantity));
-        $this->handler->handle(CreateCoin::withData($shortCode->getCode(), $quantity->getValue()));
+        $this->repository->method('findOne')->willReturn(new Machine());
+        $this->handler->handle(CreateCoin::withData($shortCode->getCode(), $quantity->count()));
+        $this->handler->handle(CreateCoin::withData($shortCode->getCode(), $quantity->count()));
     }
 
     public function testCreateCoin()
     {
         $shortCode = ShortCode::fromString('D');
         $quantity  = Quantity::fromInteger(10);
-        $coin      = Coin::withData($shortCode, $quantity);
-        $this->repository->method('findByShortCode')->with($shortCode)->willReturn(null);
-        $this->repository->expects($this->once())->method('save')->with($coin);
-        $this->handler->handle(CreateCoin::withData($shortCode->getCode(), $quantity->getValue()));
+        $machine   = new Machine();
+        $this->repository->method('findOne')->willReturn($machine);
+        $this->repository->expects($this->once())->method('save')->with($machine);
+        $this->handler->handle(CreateCoin::withData($shortCode->getCode(), $quantity->count()));
     }
 }

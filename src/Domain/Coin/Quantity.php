@@ -3,10 +3,11 @@ declare(strict_types=1);
 
 namespace VendingMachine\Domain\Coin;
 
+use Countable;
 use LogicException;
 use InvalidArgumentException;
 
-final class Quantity
+final class Quantity implements Countable
 {
     private int $value;
 
@@ -21,23 +22,23 @@ final class Quantity
         return new self($value);
     }
 
-    public function getValue(): int
+    public function count(): int
     {
         return $this->value;
     }
 
     public function add(Quantity $quantity): self
     {
-        return new self($this->value + $quantity->getValue());
+        return new self($this->value + $quantity->count());
     }
 
     public function sub(Quantity $quantity): self
     {
-        if (0 > $this->value - $quantity->getValue()) {
+        if (0 > $this->value - $quantity->count()) {
             throw new LogicException('Coin quantity must not be less than zero.');
         }
 
-        return new self($this->value - $quantity->getValue());
+        return new self($this->value - $quantity->count());
     }
 
     private function validate(int $value): void

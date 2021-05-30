@@ -5,13 +5,13 @@ namespace VendingMachine\Application\Bus;
 
 class CommandBus extends MessageBus
 {
-    public function attach(string $eventName, callable $handler)
+    protected function messageType(): string
     {
-        $this->handlers[$eventName] = $handler;
+        return self::TYPE_COMMAND;
     }
 
-    public function dispatch(object $message)
+    public function dispatch(object $message): void
     {
-        call_user_func($this->handlers[get_class($message)], $message);
+        call_user_func($this->handlers[$this->messageType()][get_class($message)], $message);
     }
 }
