@@ -1,19 +1,26 @@
 <?php
+
 declare(strict_types=1);
 
 namespace VendingMachine\Domain\Machine;
 
 use ArrayObject;
 use VendingMachine\Domain\Coin\Coin;
-use VendingMachine\Domain\Coin\Event\CoinWasCreated;
-use VendingMachine\Domain\Coin\Event\CoinWasInserted;
-use VendingMachine\Domain\Coin\Event\CoinWasReturned;
-use VendingMachine\Domain\Coin\Exception\CoinAlreadyExist;
-use VendingMachine\Domain\Coin\Exception\CoinNotFoundException;
+use VendingMachine\Domain\Coin\Event\{
+    CoinWasCreated,
+    CoinWasInserted,
+    CoinWasReturned,
+};
+use VendingMachine\Domain\Coin\Exception\{
+    CoinAlreadyExist,
+    CoinNotFoundException,
+};
 use VendingMachine\Domain\Coin\Factory\MoneyFactory;
-use VendingMachine\Domain\Coin\Money;
-use VendingMachine\Domain\Coin\Quantity;
-use VendingMachine\Domain\Coin\ShortCode;
+use VendingMachine\Domain\Coin\{
+    Money,
+    Quantity,
+    ShortCode,
+};
 use VendingMachine\Domain\Machine\Event\MachineWasCreated;
 use VendingMachine\Domain\Shared\Exception\BalanceException;
 use VendingMachine\Domain\Shared\Aggregate\AggregateRoot;

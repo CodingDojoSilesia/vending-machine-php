@@ -1,11 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace VendingMachine\Application\Service;
 
 use VendingMachine\Application\Kernel\Kernel;
-use VendingMachine\Domain\Coin\Command\CreateCoin;
-use VendingMachine\Domain\Coin\Command\InsertCoin;
-use VendingMachine\Domain\Coin\Command\ReturnCoin;
+use VendingMachine\Domain\Coin\Command\{
+    CreateCoin,
+    InsertCoin,
+    ReturnCoin,
+};
 use VendingMachine\Domain\Coin\Service\CalculateChange;
 use VendingMachine\Domain\Coin\ShortCode;
 use VendingMachine\Domain\Machine\Command\CreateMachine;

@@ -1,0 +1,45 @@
+name: Build
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.0'
+          coverage: xdebug
+
+      - name: Cache Composer packages
+        id: composer-cache
+        uses: actions/cache@v2
+        with:
+          path: vendor
+          key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-php-
+
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-progress
+
+      - name: Install test reporter
+        run: |
+          curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+          chmod +x ./cc-test-reporter
+
+      - name: Run test suite
+        env:
+          CC_TEST_REPORTER_ID: 2f2f083372f3512db51ad7da96550d311faeb06e64ec3f4892ee54bfa2005df7
+        run: |
+          ./cc-test-reporter before-build
+          ./vendor/bin/phpunit --coverage-clover clover.xml
+          ./cc-test-reporter after-build --coverage-input-type clover --exit-code $?
