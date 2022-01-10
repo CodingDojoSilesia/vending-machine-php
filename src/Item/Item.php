@@ -24,4 +24,9 @@ abstract class Item
     {
         return $this->selector === $selector;
     }
+
+    public function enoughToBuy(int $count): bool
+    {
+        return $count >= $this->value;
+    }
 }

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests;
+namespace Tests\Factory;
 
 use PHPUnit\Framework\TestCase;
 use VendingMachine\Command\BuyItemCommand;

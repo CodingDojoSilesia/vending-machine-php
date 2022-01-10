@@ -22,7 +22,7 @@ class ConsoleRequestTest extends TestCase
 
     public function testShouldThrowInvalidArgumentExceptionWhenActionNameIsInvalid(): void
     {
-        self::expectException(\InvalidArgumentException::class);
+        $this->expectException(\InvalidArgumentException::class);
 
         new ConsoleRequest('test');
     }

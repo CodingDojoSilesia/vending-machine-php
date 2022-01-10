@@ -47,7 +47,7 @@ class BuyItemCommand
             throw new \InvalidArgumentException(sprintf('Item %s is not available', $item->selector()));
         }
 
-        if ($item->enougthToBuy($moneys->count())) {
+        if ($item->enoughToBuy($moneys->count())) {
             $rest = $this->paymentCoordinator->pay($moneys->count(), $availableItem->value());
             return $this->response->setRest($rest);
         }

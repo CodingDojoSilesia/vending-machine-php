@@ -9,24 +9,30 @@ use VendingMachine\Item\ItemA;
 
 class ItemTest extends TestCase
 {
+    private ItemA $item;
+
+    protected function setUp()
+    {
+        $this->item = new ItemA();
+    }
+
     public function testShouldReturnValue(): void
     {
-        $itemA = new ItemA();
-
-        self::assertEquals(65, $itemA->value());
+        self::assertEquals(65, $this->item->value());
     }
 
     public function testShouldReturnSelector(): void
     {
-        $itemA = new ItemA();
-
-        self::assertEquals('A', $itemA->selector());
+        self::assertEquals('A', $this->item->selector());
     }
 
     public function testShouldReturnTrueWhenItemEquals(): void
     {
-        $itemA = new ItemA();
+        self::assertTrue($this->item->equalsBySelector('A'));
+    }
 
-        self::assertTrue($itemA->equalsBySelector('A'));
+    public function testShouldTestIfEnoughMoneyToBuyItem(): void
+    {
+        self::assertFalse($this->item->enoughToBuy(10));
     }
 }

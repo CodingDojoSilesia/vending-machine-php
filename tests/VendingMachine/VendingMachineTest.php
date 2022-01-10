@@ -4,8 +4,11 @@ declare(strict_types=1);
 
 namespace Tests\VendingMachine;
 
-use VendingMachine\VendingMachine;
+use LogicException;
 use PHPUnit\Framework\TestCase;
+use VendingMachine\Repository\ItemRepository;
+use VendingMachine\Util\ConsoleInputParser;
+use VendingMachine\VendingMachine;
 
 final class VendingMachineTest extends TestCase
 {
@@ -14,11 +17,15 @@ final class VendingMachineTest extends TestCase
 
     public function setUp(): void
     {
-        $this->vendingMachine = new VendingMachine();
+        $itemRepositoryMock = $this->getMockBuilder(ItemRepository::class)->getMock();
+
+        $this->vendingMachine = new VendingMachine($itemRepositoryMock, new ConsoleInputParser());
     }
 
-    public function testServiceReturnsNoService(): void
+    public function testShouldThrowAnExceptionWhenNoActionFound(): void
     {
-        $this->assertEquals('test', $this->vendingMachine->execute('test'));
+        $this->expectException(LogicException::class);
+
+        $this->vendingMachine->execute('test');
     }
 }
