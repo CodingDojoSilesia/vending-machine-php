@@ -28,7 +28,6 @@ class PaymentCoordinator
         /** @var Money $coin */
         foreach ($coins as $coin) {
             if ($coin->value() <= $rest) {
-
                 $multiplication = $rest / $coin->value();
                 $integerMultiplication = (int) $multiplication;
 
@@ -49,15 +48,14 @@ class PaymentCoordinator
 
     private function getCoins(): array
     {
-        $coins = array_filter(AvailableMoney::getMoney(), static function(Money $money) {
+        $coins = array_filter(AvailableMoney::getMoney(), static function (Money $money) {
             return $money instanceof Coin;
         });
         // sort DESC
-        usort($coins, static function(Money $a, Money $b) {
+        usort($coins, static function (Money $a, Money $b) {
             return $a->value() < $b->value();
         });
 
         return $coins;
     }
-
 }
