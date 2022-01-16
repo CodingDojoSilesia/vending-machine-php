@@ -11,19 +11,10 @@ use VendingMachine\Response\ConsoleResponse;
 
 class BuyItemCommand
 {
-    /**
-     * @var ItemRepository
-     */
     private ItemRepository $itemRepository;
 
-    /**
-     * @var PaymentCoordinator
-     */
     private PaymentCoordinator $paymentCoordinator;
 
-    /**
-     * @var ConsoleResponse
-     */
     private ConsoleResponse $response;
 
     public function __construct(
