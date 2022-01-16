@@ -16,10 +16,11 @@ class ConsoleInputParser implements InputParser
         $parameters = $this->splitParameters($input);
 
         $action = $this->filterAction($parameters);
+        // code smelling
         $consoleRequest = new ConsoleRequest($action);
 
         $money = $this->filterMoney($parameters);
-
+        // code smelling
         $consoleRequest->setMoney(new MoneyCollection($money));
 
         return $consoleRequest;
@@ -46,7 +47,7 @@ class ConsoleInputParser implements InputParser
         }
 
         if ($action === null) {
-            throw new \LogicException('No action found!');
+            throw new \LogicException(sprintf('No action found for %s', ...$parameters));
         }
         return $action;
     }
