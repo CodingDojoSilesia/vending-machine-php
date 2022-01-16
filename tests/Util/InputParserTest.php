@@ -11,12 +11,9 @@ use VendingMachine\Util\ConsoleInputParser;
 
 class InputParserTest extends TestCase
 {
-    /**
-     * @var ConsoleInputParser
-     */
     private ConsoleInputParser $parser;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->parser = new ConsoleInputParser();
     }
@@ -35,19 +32,30 @@ class InputParserTest extends TestCase
         self::assertEquals('GET-B', $request->action());
     }
 
-    public function testShouldParseInputAndReturnConsoleRequestWith4QuarterMoney(): void
+    /**
+     * @return void
+     * @dataProvider dataSetForParsingMoney
+     */
+    public function testShouldParseInputAndReturnConsoleRequestWithCorrectMoney(string $input, array $output): void
     {
-        $request = $this->parser->parse('Q, Q, Q, Q, GET-B');
-
-
         self::assertEquals(
-            [
-                new Quarter(),
-                new Quarter(),
-                new Quarter(),
-                new Quarter(),
-            ],
-            $request->money()
+            $output,
+            ($this->parser->parse($input))->money()
         );
+    }
+
+    public function dataSetForParsingMoney(): array
+    {
+        return [
+            [
+                'input' => 'Q, Q, Q, Q, GET-B',
+                'output' => [
+                    new Quarter(),
+                    new Quarter(),
+                    new Quarter(),
+                    new Quarter(),
+                ],
+            ]
+        ];
     }
 }

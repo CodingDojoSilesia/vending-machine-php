@@ -9,7 +9,6 @@ use VendingMachine\Repository\InMemoryItemRepository;
 use VendingMachine\Util\ConsoleInputParser;
 use VendingMachine\VendingMachine;
 
-
 $itemRepository = new InMemoryItemRepository();
 $itemRepository->add(new ItemB());
 
