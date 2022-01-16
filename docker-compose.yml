@@ -5,4 +5,4 @@ services:
     container_name: vending_machine
     volumes:
         - .:/usr/src/app
-    command: ["make", "check"]
+    command: ["make"]
