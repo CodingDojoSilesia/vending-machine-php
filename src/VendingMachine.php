@@ -15,14 +15,8 @@ use VendingMachine\Util\InputParser;
 
 final class VendingMachine
 {
-
-    /**
-     * @var ItemRepository
-     */
     private ItemRepository $itemRepository;
-    /**
-     * @var InputParser
-     */
+
     private InputParser $inputParser;
 
     public function __construct(ItemRepository $itemRepository, InputParser $inputParser)
@@ -31,22 +25,19 @@ final class VendingMachine
         $this->inputParser = $inputParser;
     }
 
-    public function execute(string $input): string
+    public function execute(string $input): ConsoleResponse
     {
         $request = $this->parseInput($input);
 
         $buyCommand = new BuyItemCommand($this->itemRepository, new PaymentCoordinator(), new ConsoleResponse());
 
-        $response = $buyCommand->execute(
+        return $buyCommand->execute(
             new BuyItemRequest(new ItemB(), $request->moneyCollection())
         );
-
-        return $response->getOutput();
     }
 
     private function parseInput(string $input): ConsoleRequest
     {
-        /** @var ConsoleRequest $request */
         return $this->inputParser->parse($input);
     }
 }
