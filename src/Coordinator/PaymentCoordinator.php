@@ -18,9 +18,8 @@ class PaymentCoordinator
             $coinRest = $this->calculateRest($rest, $this->getCoins());
             return new MoneyCollection($coinRest);
         }
-
+        // add domain exception with information about passed values
         throw new \InvalidArgumentException('No enough money to pay for it!');
-
     }
 
     private function calculateRest(int $rest, array $coins): array

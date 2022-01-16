@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Coordinator;
 
+use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 use VendingMachine\Coordinator\PaymentCoordinator;
 use VendingMachine\Model\Dime;
@@ -66,5 +67,12 @@ class PaymentCoordinatorTest extends TestCase
             ],
             $rest->money()
         );
+    }
+
+    public function testTryToPayForProductWithoutAnyMoney(): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+
+        $this->paymentCoordinator->pay(0, 65);
     }
 }
