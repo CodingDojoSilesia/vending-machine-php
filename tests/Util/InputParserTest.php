@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Tests\Util;
 
 use PHPUnit\Framework\TestCase;
+use VendingMachine\Model\Dollar;
+use VendingMachine\Model\Nickel;
 use VendingMachine\Model\Quarter;
 use VendingMachine\Request\ConsoleRequest;
 use VendingMachine\Util\ConsoleInputParser;
@@ -55,7 +57,16 @@ class InputParserTest extends TestCase
                     new Quarter(),
                     new Quarter(),
                 ],
+            ],
+            [
+                'input' => 'Q,  GET-B',
+                'output' => [new Quarter()]
+            ],
+            [
+                'input' => 'N, GET-B',
+                'output' => [new Nickel()]
             ]
+
         ];
     }
 }
