@@ -82,4 +82,11 @@ class PaymentCoordinatorTest extends TestCase
 
         $this->paymentCoordinator->pay(10, 65);
     }
+
+    public function testShouldTestAbstractSituationWithPayingWithMinusMoney(): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+
+        $this->paymentCoordinator->pay(-10, 65);
+    }
 }
