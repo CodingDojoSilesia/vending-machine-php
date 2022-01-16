@@ -12,7 +12,6 @@ use VendingMachine\Model\Dollar;
 use VendingMachine\Model\MoneyCollection;
 use VendingMachine\Repository\InMemoryItemRepository;
 use VendingMachine\Request\BuyItemRequest;
-use VendingMachine\Request\ConsoleRequest;
 use VendingMachine\Response\ConsoleResponse;
 
 class BuyItemCommandTest extends TestCase
@@ -29,5 +28,19 @@ class BuyItemCommandTest extends TestCase
         );
 
         self::assertInstanceOf(ConsoleResponse::class, $result);
+    }
+
+    public function testShouldCalculateRestAndReturnResponseWithCorrectAmount(): void
+    {
+        $itemRepository = new InMemoryItemRepository();
+        $itemRepository->add(new ItemB());
+
+        $buyItemCommand = new BuyItemCommand($itemRepository, new PaymentCoordinator(), new ConsoleResponse());
+
+        $result = $buyItemCommand->execute(
+            new BuyItemRequest(new ItemB(), new MoneyCollection([new Dollar()]))
+        );
+
+        self::assertEquals(35, $result->rest()->count());
     }
 }

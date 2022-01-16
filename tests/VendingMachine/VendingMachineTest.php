@@ -12,8 +12,7 @@ use VendingMachine\VendingMachine;
 
 final class VendingMachineTest extends TestCase
 {
-    /** @var VendingMachine */
-    private $vendingMachine;
+    private VendingMachine $vendingMachine;
 
     public function setUp(): void
     {

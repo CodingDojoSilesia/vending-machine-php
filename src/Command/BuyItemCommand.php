@@ -39,8 +39,9 @@ class BuyItemCommand
         }
 
         if ($item->enoughToBuy($moneys->count())) {
-            $rest = $this->paymentCoordinator->pay($moneys->count(), $availableItem->value());
-            return $this->response->setRest($rest);
+            return $this->response->setRest(
+                $this->paymentCoordinator->pay($moneys->count(), $availableItem->value())
+            );
         }
 
         throw new \InvalidArgumentException('Set enough money to buy Item!');
