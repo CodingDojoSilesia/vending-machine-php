@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace VendingMachine\Item;
 
-class ItemB extends Item
+final class ItemB extends Item
 {
     protected string $selector = 'B';
 
