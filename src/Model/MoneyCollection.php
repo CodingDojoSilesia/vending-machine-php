@@ -32,7 +32,7 @@ class MoneyCollection implements \Countable
     /**
      * @inheritDoc
      */
-    public function count()
+    public function count(): int
     {
         $sum = 0;
 

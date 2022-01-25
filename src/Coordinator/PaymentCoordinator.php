@@ -53,7 +53,7 @@ class PaymentCoordinator
         });
         // sort DESC
         usort($coins, static function (Money $a, Money $b) {
-            return $a->value() < $b->value();
+            return min($a->value(), $b->value());
         });
 
         return $coins;

@@ -11,7 +11,7 @@ class ItemTest extends TestCase
 {
     private ItemA $item;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->item = new ItemA();
     }
