@@ -48,12 +48,11 @@ class PaymentCoordinator
 
     private function getCoins(): array
     {
-        $coins = array_filter(AvailableMoney::getMoney(), static function (Money $money) {
-            return $money instanceof Coin;
-        });
+        $coins = AvailableMoney::coins();
+
         // sort DESC
         usort($coins, static function (Money $a, Money $b) {
-            return min($a->value(), $b->value());
+            return ($a->value() > $b->value()) ? -1 : 1;
         });
 
         return $coins;

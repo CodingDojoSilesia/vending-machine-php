@@ -32,13 +32,13 @@ class PaymentCoordinatorTest extends TestCase
         $rest = $this->paymentCoordinator->pay(100, 50);
 
         self::assertEquals(50, $rest->count());
-//        self::assertEquals(
-//            [
-//                new Quarter(),
-//                new Quarter()
-//            ],
-//            $rest->money()
-//        );
+        self::assertEquals(
+            [
+                new Quarter(),
+                new Quarter()
+            ],
+            $rest->money()
+        );
     }
 
     public function testShouldReturnRestInTwoDime(): void
@@ -60,13 +60,13 @@ class PaymentCoordinatorTest extends TestCase
         $rest = $this->paymentCoordinator->pay(100, 65);
 
         self::assertEquals(35, $rest->count());
-//        self::assertEquals(
-//            [
-//                new Quarter(),
-//                new Dime()
-//            ],
-//            $rest->money()
-//        );
+        self::assertEquals(
+            [
+                new Quarter(),
+                new Dime()
+            ],
+            $rest->money()
+        );
     }
 
     public function testTryToPayForProductWithoutAnyMoney(): void

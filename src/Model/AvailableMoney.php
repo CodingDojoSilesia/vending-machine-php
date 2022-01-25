@@ -8,12 +8,20 @@ final class AvailableMoney
 {
     public static function getMoney(): array
     {
-        // @TODO load class from specific dir/namespace
         return [
             new Nickel(),
             new Dime(),
             new Quarter(),
             new Dollar()
+        ];
+    }
+
+    public static function coins()
+    {
+        return [
+            new Nickel(),
+            new Dime(),
+            new Quarter(),
         ];
     }
 }
