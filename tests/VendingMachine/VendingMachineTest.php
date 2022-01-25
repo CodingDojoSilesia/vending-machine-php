@@ -35,11 +35,11 @@ final class VendingMachineTest extends TestCase
     public function testShouldOrderProductAndSpendAllMoney(): void
     {
         $repository = new InMemoryItemRepository();
-        $repository->add(new ItemC());
+        $repository->add(new ItemB());
 
         $vendingMachine = new VendingMachine($repository, new ConsoleInputParser());
 
-        $response = $vendingMachine->execute('Q, Q, Q, Q, GET-C');
+        $response = $vendingMachine->execute('Q, Q, Q, Q, GET-B');
 
         self::assertEquals(0 ,$response->rest()->count());
     }

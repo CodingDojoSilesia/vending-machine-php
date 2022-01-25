@@ -6,27 +6,27 @@ namespace VendingMachine\Item;
 
 abstract class Item
 {
-    protected string $selector = '';
+    protected const SELECTOR = '';
 
-    protected int $value = 0;
+    protected const VALUE = 0;
 
     public function value(): int
     {
-        return $this->value;
+        return static::VALUE;
     }
 
     public function selector(): string
     {
-        return $this->selector;
+        return static::SELECTOR;
     }
 
     public function equalsBySelector(string $selector): bool
     {
-        return $this->selector === $selector;
+        return static::SELECTOR === $selector;
     }
 
     public function enoughToBuy(int $count): bool
     {
-        return $count >= $this->value;
+        return $count >= static::VALUE;
     }
 }

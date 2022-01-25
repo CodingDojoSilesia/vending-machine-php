@@ -16,6 +16,8 @@ class ConsoleRequest implements Request
      */
     protected string $action;
 
+    protected string $productShortCode;
+
     public function __construct(string $action)
     {
         $this->assertAction($action);
@@ -63,5 +65,15 @@ class ConsoleRequest implements Request
     public function moneyCollection(): MoneyCollection
     {
         return $this->moneys;
+    }
+
+    public function setProductShortCode(string $productShortCode): void
+    {
+        $this->productShortCode = $productShortCode;
+    }
+
+    public function productShortCode(): string
+    {
+        return $this->productShortCode;
     }
 }

@@ -32,11 +32,11 @@ class BuyItemCommand
         $item = $request->item();
         $moneys = $request->moneyCollection();
 
-        $availableItem = $this->itemRepository->getItemBySelector($item->selector());
+        $availableItem = $this->itemRepository->getItemBySelector($item);
 
-        if (!$availableItem) throw new \InvalidArgumentException(sprintf('Item %s is not available', $item->selector()));
+        if (!$availableItem) throw new \InvalidArgumentException(sprintf('Item %s is not available', $item));
 
-        if ($item->enoughToBuy($moneys->count())) {
+        if ($availableItem->enoughToBuy($moneys->count())) {
             return $this->response->setRest(
                 $this->paymentCoordinator->pay($moneys->count(), $availableItem->value())
             );

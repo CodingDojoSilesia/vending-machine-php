@@ -23,6 +23,8 @@ class ConsoleInputParser implements InputParser
         // code smelling
         $consoleRequest->setMoney(new MoneyCollection($money));
 
+        $consoleRequest->setProductShortCode($this->filterProductCode($action));
+
         return $consoleRequest;
     }
 
@@ -46,9 +48,8 @@ class ConsoleInputParser implements InputParser
             }
         }
 
-        if ($action === null) {
-            throw new \LogicException(sprintf('No action found for %s', ...$parameters));
-        }
+        if (!$action) throw new \LogicException(sprintf('No action found for %s', ...$parameters));
+
         return $action;
     }
 
@@ -72,6 +73,11 @@ class ConsoleInputParser implements InputParser
         }
 
         return $money;
+    }
+
+    private function filterProductCode(string $action): string
+    {
+        return explode('-', $action)[1];
     }
 
 }

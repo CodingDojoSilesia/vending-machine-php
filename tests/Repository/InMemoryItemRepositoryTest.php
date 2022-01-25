@@ -27,6 +27,8 @@ class InMemoryItemRepositoryTest extends TestCase
         $repository->add(new ItemB());
         $repository->add(new ItemC());
 
+        $itemBselector = (new ItemB())->selector();
+
         $result = $repository->getItemBySelector((new ItemB())->selector());
 
         self::assertEquals(new ItemB(), $result);

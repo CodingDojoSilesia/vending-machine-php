@@ -34,6 +34,13 @@ class InputParserTest extends TestCase
         self::assertEquals('GET-B', $request->action());
     }
 
+    public function testShouldReturnProductCodeFromInput(): void
+    {
+        $request = $this->parser->parse('Q, Q, Q, Q, GET-B');
+
+        self::assertEquals('B', $request->productShortCode());
+    }
+
     /**
      * @return void
      * @dataProvider dataSetForParsingMoney

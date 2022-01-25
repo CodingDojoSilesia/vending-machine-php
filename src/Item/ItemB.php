@@ -6,7 +6,7 @@ namespace VendingMachine\Item;
 
 final class ItemB extends Item
 {
-    protected string $selector = 'B';
+    protected const SELECTOR = 'B';
 
-    protected int $value = 100;
+    protected const VALUE = 100;
 }

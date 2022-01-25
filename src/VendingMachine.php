@@ -29,11 +29,16 @@ final class VendingMachine
     {
         $request = $this->parseInput($input);
 
-        $buyCommand = new BuyItemCommand($this->itemRepository, new PaymentCoordinator(), new ConsoleResponse());
+        if (preg_match('/GET-[A-C]/', $input)) {
+            $buyCommand = new BuyItemCommand($this->itemRepository, new PaymentCoordinator(), new ConsoleResponse());
+            // get item from input and parse it
+            return $buyCommand->execute(
+                new BuyItemRequest($request->productShortCode(), $request->moneyCollection())
+            );
+        }
 
-        return $buyCommand->execute(
-            new BuyItemRequest(new ItemB(), $request->moneyCollection())
-        );
+        throw new \RuntimeException('Vending machine has error. Try again, please.');
+
     }
 
     private function parseInput(string $input): ConsoleRequest

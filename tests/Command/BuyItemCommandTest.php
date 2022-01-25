@@ -24,7 +24,7 @@ class BuyItemCommandTest extends TestCase
         $buyItemCommand = new BuyItemCommand($itemRepository, new PaymentCoordinator(), new ConsoleResponse());
 
         $result = $buyItemCommand->execute(
-            new BuyItemRequest(new ItemB(), new MoneyCollection([new Dollar()]))
+            new BuyItemRequest('B', new MoneyCollection([new Dollar()]))
         );
 
         self::assertInstanceOf(ConsoleResponse::class, $result);
@@ -38,7 +38,7 @@ class BuyItemCommandTest extends TestCase
         $buyItemCommand = new BuyItemCommand($itemRepository, new PaymentCoordinator(), new ConsoleResponse());
 
         $result = $buyItemCommand->execute(
-            new BuyItemRequest(new ItemB(), new MoneyCollection([new Dollar()]))
+            new BuyItemRequest('B', new MoneyCollection([new Dollar()]))
         );
 
         self::assertEquals(0, $result->rest()->count());
