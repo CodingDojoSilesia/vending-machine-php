@@ -21,17 +21,11 @@ class MoneyCollection implements \Countable
         $this->money[] = $money;
     }
 
-    /**
-     * @return array|Money[]
-     */
     public function money()
     {
         return $this->money;
     }
 
-    /**
-     * @inheritDoc
-     */
     public function count(): int
     {
         $sum = 0;

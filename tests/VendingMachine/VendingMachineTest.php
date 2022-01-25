@@ -27,4 +27,6 @@ final class VendingMachineTest extends TestCase
 
         $this->vendingMachine->execute('test');
     }
+
+
 }

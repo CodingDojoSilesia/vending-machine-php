@@ -20,5 +20,9 @@ class MoneyCollectionTest extends TestCase
         );
 
         self::assertEquals(50, $moneyCollection->count());
+        self::assertEquals([
+            new Quarter(),
+            new Quarter()
+        ], $moneyCollection->money());
     }
 }
