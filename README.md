@@ -14,5 +14,8 @@ Open interactive bash `docker-compose run --rm vending_machine bash`
 ### Development
 Copy dependencies form volume: `sudo docker cp vending_machine:/usr/src/app/vendor ./`
 
+### Install dependencies (to local developing)
+`docker-compose run --rm vending_machine composer install`
+
 ### Run tests
-`docker-composer run --rm vending_machine ./vendor/bin/phpunit` 
+`docker-compose run --rm vending_machine ./vendor/bin/phpunit` 
