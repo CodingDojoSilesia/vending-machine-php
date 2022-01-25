@@ -6,6 +6,10 @@ namespace Tests\VendingMachine;
 
 use LogicException;
 use PHPUnit\Framework\TestCase;
+use VendingMachine\Item\ItemA;
+use VendingMachine\Item\ItemB;
+use VendingMachine\Item\ItemC;
+use VendingMachine\Repository\InMemoryItemRepository;
 use VendingMachine\Repository\ItemRepository;
 use VendingMachine\Util\ConsoleInputParser;
 use VendingMachine\VendingMachine;
@@ -28,5 +32,27 @@ final class VendingMachineTest extends TestCase
         $this->vendingMachine->execute('test');
     }
 
+    public function testShouldOrderProductAndSpendAllMoney(): void
+    {
+        $repository = new InMemoryItemRepository();
+        $repository->add(new ItemC());
 
+        $vendingMachine = new VendingMachine($repository, new ConsoleInputParser());
+
+        $response = $vendingMachine->execute('Q, Q, Q, Q, GET-C');
+
+        self::assertEquals(0 ,$response->rest()->count());
+    }
+
+    public function testShouldOrderProductAndGetRest(): void
+    {
+        $repository = new InMemoryItemRepository();
+        $repository->add(new ItemA());
+
+        $vendingMachine = new VendingMachine($repository, new ConsoleInputParser());
+
+        $response = $vendingMachine->execute('Q, Q, Q, Q, GET-A');
+
+        self::assertEquals(35 ,$response->rest()->count());
+    }
 }

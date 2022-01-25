@@ -34,9 +34,7 @@ class BuyItemCommand
 
         $availableItem = $this->itemRepository->getItemBySelector($item->selector());
 
-        if ($availableItem === null) {
-            throw new \InvalidArgumentException(sprintf('Item %s is not available', $item->selector()));
-        }
+        if (!$availableItem) throw new \InvalidArgumentException(sprintf('Item %s is not available', $item->selector()));
 
         if ($item->enoughToBuy($moneys->count())) {
             return $this->response->setRest(
