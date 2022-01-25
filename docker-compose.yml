@@ -4,6 +4,7 @@ services:
     build: .
     container_name: vending_machine
     volumes:
-        - .:/usr/src/app
+        - .:/app
+        - /app/vendor
     environment:
         - PHP_IDE_CONFIG=serverName=vending_machine

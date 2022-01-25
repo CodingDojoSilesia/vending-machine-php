@@ -4,12 +4,15 @@
 Instructions: https://code.joejag.com/coding-dojo/vending-machine/  
 Tests: `./vendor/bin/phpunit`
 
-## Setup
+### Setup
 Run commands:
 * `docker-compose up`
 
-## Run
+### Run
 Open interactive bash `docker-compose run --rm vending_machine bash`
 
-## Development
+### Development
 Copy dependencies form volume: `sudo docker cp vending_machine:/usr/src/app/vendor ./`
+
+### Run tests
+`docker-composer run --rm vending_machine ./vendor/bin/phpunit` 
