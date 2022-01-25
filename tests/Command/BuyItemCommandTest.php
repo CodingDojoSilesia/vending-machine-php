@@ -41,6 +41,6 @@ class BuyItemCommandTest extends TestCase
             new BuyItemRequest(new ItemB(), new MoneyCollection([new Dollar()]))
         );
 
-        self::assertEquals(35, $result->rest()->count());
+        self::assertEquals(0, $result->rest()->count());
     }
 }
