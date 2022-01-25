@@ -5,4 +5,5 @@ services:
     container_name: vending_machine
     volumes:
         - .:/usr/src/app
-    command: ["make"]
+    environment:
+        - PHP_IDE_CONFIG=serverName=vending_machine
