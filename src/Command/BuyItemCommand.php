@@ -39,6 +39,8 @@ class BuyItemCommand
         }
 
         if ($availableItem->enoughToBuy($moneys->count())) {
+            $this->response->setProduct($availableItem);
+
             return $this->response->setRest(
                 $this->paymentCoordinator->pay($moneys->count(), $availableItem->value())
             );

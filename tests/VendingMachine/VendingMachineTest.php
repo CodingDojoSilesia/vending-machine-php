@@ -8,7 +8,8 @@ use LogicException;
 use PHPUnit\Framework\TestCase;
 use VendingMachine\Item\ItemA;
 use VendingMachine\Item\ItemB;
-use VendingMachine\Item\ItemC;
+use VendingMachine\Model\Dime;
+use VendingMachine\Model\Quarter;
 use VendingMachine\Repository\InMemoryItemRepository;
 use VendingMachine\Repository\ItemRepository;
 use VendingMachine\Util\ConsoleInputParser;
@@ -42,6 +43,7 @@ final class VendingMachineTest extends TestCase
         $response = $vendingMachine->execute('Q, Q, Q, Q, GET-B');
 
         self::assertEquals(0, $response->rest()->count());
+        self::assertEquals('B', $response->getOutput());
     }
 
     public function testShouldOrderProductAndGetRest(): void
@@ -54,6 +56,11 @@ final class VendingMachineTest extends TestCase
         $response = $vendingMachine->execute('Q, Q, Q, Q, GET-A');
 
         self::assertEquals(35, $response->rest()->count());
+        self::assertEquals([
+            new Quarter(),
+            new Dime(),
+        ], $response->rest()->money());
+        self::assertEquals('A', $response->getOutput());
     }
 
     public function testShouldThrowExceptionWhileOrderingProductIsNotAvailable(): void

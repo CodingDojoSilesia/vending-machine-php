@@ -4,35 +4,33 @@ declare(strict_types=1);
 
 namespace VendingMachine\Response;
 
+use VendingMachine\Item\Item;
 use VendingMachine\Model\MoneyCollection;
 
 class ConsoleResponse
 {
-    /**
-     * @var MoneyCollection
-     */
+    private Item $product;
+
     private MoneyCollection $rest;
 
-    /**
-     * @param MoneyCollection $rest
-     * @return ConsoleResponse
-     */
     public function setRest(MoneyCollection $rest): ConsoleResponse
     {
         $this->rest = $rest;
         return $this;
     }
 
-    /**
-     * @return MoneyCollection
-     */
     public function rest(): MoneyCollection
     {
         return $this->rest;
     }
 
+    public function setProduct(Item $product): void
+    {
+        $this->product = $product;
+    }
+
     public function getOutput(): string
     {
-        return "resztaaa! \n";
+        return $this->product->selector();
     }
 }
