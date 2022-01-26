@@ -41,7 +41,7 @@ final class VendingMachineTest extends TestCase
 
         $response = $vendingMachine->execute('Q, Q, Q, Q, GET-B');
 
-        self::assertEquals(0 ,$response->rest()->count());
+        self::assertEquals(0, $response->rest()->count());
     }
 
     public function testShouldOrderProductAndGetRest(): void
@@ -53,6 +53,19 @@ final class VendingMachineTest extends TestCase
 
         $response = $vendingMachine->execute('Q, Q, Q, Q, GET-A');
 
-        self::assertEquals(35 ,$response->rest()->count());
+        self::assertEquals(35, $response->rest()->count());
     }
+
+    public function testShouldThrowExceptionWhileOrderingProductIsNotAvailable(): void
+    {
+        $this->expectException(\InvalidArgumentException::class);
+
+        $repository = new InMemoryItemRepository();
+        $repository->add(new ItemA());
+
+        $vendingMachine = new VendingMachine($repository, new ConsoleInputParser());
+
+        $vendingMachine->execute('Q, Q, Q, Q, GET-B');
+    }
+
 }
