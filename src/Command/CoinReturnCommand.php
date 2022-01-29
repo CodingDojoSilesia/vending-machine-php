@@ -8,7 +8,7 @@ use VendingMachine\Response\Response;
 
 class CoinReturnCommand
 {
-    public function execute(CoinReturnRequest $request): Response
+    public function __invoke(CoinReturnRequest $request): Response
     {
         return (new CoinReturnConsoleResponse($request->moneyCollection()));
     }

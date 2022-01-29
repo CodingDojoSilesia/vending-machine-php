@@ -18,7 +18,7 @@ class BuyItemCommand
     ) {
     }
 
-    public function execute(BuyItemRequest $request): ConsoleResponse
+    public function __invoke(BuyItemRequest $request): ConsoleResponse
     {
         $item = $request->item();
         $moneys = $request->moneyCollection();
