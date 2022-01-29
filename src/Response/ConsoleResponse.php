@@ -7,7 +7,7 @@ namespace VendingMachine\Response;
 use VendingMachine\Item\Item;
 use VendingMachine\Model\MoneyCollection;
 
-class ConsoleResponse
+class ConsoleResponse implements Response
 {
     private Item $product;
 

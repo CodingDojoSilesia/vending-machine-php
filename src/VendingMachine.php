@@ -29,9 +29,11 @@ final class VendingMachine
     {
         $request = $this->parseInput($input);
 
+        // match expression ?
         if (preg_match('/GET-[A-C]/', $input)) {
             return $this->executeBuy($request);
         }
+
         throw new \RuntimeException('Vending machine has error. Try again, please.');
     }
 

@@ -6,7 +6,7 @@ namespace VendingMachine\Request;
 
 use VendingMachine\Model\MoneyCollection;
 
-class BuyItemRequest
+class BuyItemRequest implements CommandRequest
 {
     public function __construct(private string $item, private MoneyCollection $moneyCollection)
     {

@@ -11,9 +11,6 @@ class ConsoleRequest implements Request
 {
     private MoneyCollection $moneys;
 
-    /**
-     * @var string
-     */
     protected string $action;
 
     protected string $productShortCode;
@@ -26,25 +23,16 @@ class ConsoleRequest implements Request
         $this->moneys = new MoneyCollection([]);
     }
 
-    /**
-     * @param Money $money
-     */
     public function addMoney(Money $money): void
     {
         $this->moneys->addMoney($money);
     }
 
-    /**
-     * @param MoneyCollection $moneys
-     */
     public function setMoney(MoneyCollection $moneys): void
     {
         $this->moneys = $moneys;
     }
 
-    /**
-     * @param string $action
-     */
     public function assertAction(string $action): void
     {
         if (!preg_match('/GET-[A-C]/', $action)) {
@@ -52,7 +40,7 @@ class ConsoleRequest implements Request
         }
     }
 
-    public function action(): string 
+    public function action(): string
     {
         return $this->action;
     }
