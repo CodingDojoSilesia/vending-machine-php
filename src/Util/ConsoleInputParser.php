@@ -40,10 +40,19 @@ class ConsoleInputParser implements InputParser
     private function filterAction(array $parameters): string
     {
         $action = null;
+        // array_filter
         /** @var string $parameter */
         foreach ($parameters as $parameter) {
             // filter action - set to ConsoleRequest
             if (preg_match('/GET-[A-C]/', $parameter)) {
+                $action = $parameter;
+            }
+        }
+
+        // array_filter
+        foreach ($parameters as $parameter) {
+            // filter action - set to ConsoleRequest
+            if (str_contains($parameter, 'COIN-RETURN')) {
                 $action = $parameter;
             }
         }

@@ -5,12 +5,15 @@ declare(strict_types=1);
 namespace VendingMachine;
 
 use VendingMachine\Command\BuyItemCommand;
+use VendingMachine\Command\CoinReturnCommand;
 use VendingMachine\Coordinator\PaymentCoordinator;
 use VendingMachine\Item\ItemB;
 use VendingMachine\Repository\ItemRepository;
 use VendingMachine\Request\BuyItemRequest;
+use VendingMachine\Request\CoinReturnRequest;
 use VendingMachine\Request\ConsoleRequest;
 use VendingMachine\Response\ConsoleResponse;
+use VendingMachine\Response\Response;
 use VendingMachine\Util\InputParser;
 
 final class VendingMachine
@@ -25,13 +28,17 @@ final class VendingMachine
         $this->inputParser = $inputParser;
     }
 
-    public function execute(string $input): ConsoleResponse
+    public function execute(string $input): Response
     {
         $request = $this->parseInput($input);
 
         // match expression ?
         if (preg_match('/GET-[A-C]/', $input)) {
             return $this->executeBuy($request);
+        }
+
+        if (str_contains($input, 'COIN-RETURN')) {
+            return $this->executeCoinReturn($request);
         }
 
         throw new \RuntimeException('Vending machine has error. Try again, please.');
@@ -42,11 +49,7 @@ final class VendingMachine
         return $this->inputParser->parse($input);
     }
 
-    /**
-     * @param ConsoleRequest $request
-     * @return ConsoleResponse
-     */
-    private function executeBuy(ConsoleRequest $request): ConsoleResponse
+    private function executeBuy(ConsoleRequest $request): Response
     {
         $buyCommand = new BuyItemCommand($this->itemRepository, new PaymentCoordinator(), new ConsoleResponse());
         // get item from input and parse it
@@ -55,4 +58,10 @@ final class VendingMachine
         );
     }
 
+    private function executeCoinReturn(ConsoleRequest $request): Response
+    {
+        return (new CoinReturnCommand())->execute(
+            new CoinReturnRequest($request->moneyCollection())
+        );
+    }
 }

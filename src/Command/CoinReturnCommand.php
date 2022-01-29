@@ -3,12 +3,13 @@
 namespace VendingMachine\Command;
 
 use VendingMachine\Request\CoinReturnRequest;
-use VendingMachine\Response\ConsoleResponse;
+use VendingMachine\Response\CoinReturnConsoleResponse;
+use VendingMachine\Response\Response;
 
 class CoinReturnCommand
 {
-    public function execute(CoinReturnRequest $request): ConsoleResponse
+    public function execute(CoinReturnRequest $request): Response
     {
-        return (new ConsoleResponse)->setRest($request->moneyCollection());
+        return (new CoinReturnConsoleResponse($request->moneyCollection()));
     }
 }

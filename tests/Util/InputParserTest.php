@@ -41,6 +41,13 @@ class InputParserTest extends TestCase
         self::assertEquals('B', $request->productShortCode());
     }
 
+    public function testShouldRecognizeCoinReturnAction(): void
+    {
+        $request = $this->parser->parse('Q, Q, Q, Q, COIN-RETURN');
+
+        self::assertEquals('COIN-RETURN', $request->action());
+    }
+
     /**
      * @return void
      * @dataProvider dataSetForParsingMoney

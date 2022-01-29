@@ -92,14 +92,13 @@ final class VendingMachineTest extends TestCase
         self::assertEquals('A', $response->getOutput());
     }
 
-//    public function testShouldReturnInsertedCoinsOnCoinReturn(): void
-//    {
-//        $repository = new InMemoryItemRepository();
-//        $repository->add(new ItemA());
-//
-//        $vendingMachine = new VendingMachine($repository, new ConsoleInputParser());
-//
-//        $response = $vendingMachine->execute('DOLLAR, GET-A');
-//    }
+    public function testShouldReturnInsertedCoinsOnCoinReturn(): void
+    {
+        $vendingMachine = new VendingMachine(new InMemoryItemRepository(), new ConsoleInputParser());
+
+        $response = $vendingMachine->execute('Q, Q, COIN-RETURN');
+
+        self::assertEquals('Q, Q', $response->getOutput());
+    }
 
 }

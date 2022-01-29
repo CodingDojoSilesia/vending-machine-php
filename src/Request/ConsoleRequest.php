@@ -35,8 +35,8 @@ class ConsoleRequest implements Request
 
     public function assertAction(string $action): void
     {
-        if (!preg_match('/GET-[A-C]/', $action)) {
-            throw new \InvalidArgumentException('Invalid action name!');
+        if ($action !== 'COIN-RETURN' && !preg_match('/GET-[A-C]/', $action)) {
+            throw new \InvalidArgumentException(sprintf('Invalid action name %s!', $action));
         }
     }
 
