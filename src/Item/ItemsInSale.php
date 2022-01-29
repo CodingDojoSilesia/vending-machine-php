@@ -14,4 +14,9 @@ class ItemsInSale
             new ItemC()
         ];
     }
+
+    public static function itemShortCodes(): array
+    {
+        return array_map(static fn(Item $money) => $money->selector(), self::getItems());
+    }
 }

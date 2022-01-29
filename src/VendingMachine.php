@@ -8,6 +8,7 @@ use VendingMachine\Command\BuyItemCommand;
 use VendingMachine\Command\CoinReturnCommand;
 use VendingMachine\Coordinator\PaymentCoordinator;
 use VendingMachine\Item\ItemB;
+use VendingMachine\Item\ItemsInSale;
 use VendingMachine\Repository\ItemRepository;
 use VendingMachine\Request\BuyItemRequest;
 use VendingMachine\Request\CoinReturnRequest;
@@ -32,8 +33,7 @@ final class VendingMachine
     {
         $request = $this->parseInput($input);
 
-        // match expression ?
-        if (preg_match('/GET-[A-C]/', $input)) {
+        if (preg_match("/GET-[" . implode('|', ItemsInSale::itemShortCodes()). "]/", $input)) {
             return $this->executeBuy($request);
         }
 
