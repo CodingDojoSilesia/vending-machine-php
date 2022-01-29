@@ -11,20 +11,11 @@ use VendingMachine\Response\ConsoleResponse;
 
 class BuyItemCommand
 {
-    private ItemRepository $itemRepository;
-
-    private PaymentCoordinator $paymentCoordinator;
-
-    private ConsoleResponse $response;
-
     public function __construct(
-        ItemRepository $itemRepository,
-        PaymentCoordinator $paymentCoordinator,
-        ConsoleResponse $response
+        private ItemRepository $itemRepository,
+        private PaymentCoordinator $paymentCoordinator,
+        private ConsoleResponse $response
     ) {
-        $this->itemRepository = $itemRepository;
-        $this->paymentCoordinator = $paymentCoordinator;
-        $this->response = $response;
     }
 
     public function execute(BuyItemRequest $request): ConsoleResponse
