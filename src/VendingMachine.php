@@ -7,7 +7,6 @@ namespace VendingMachine;
 use VendingMachine\Command\BuyItemCommand;
 use VendingMachine\Command\CoinReturnCommand;
 use VendingMachine\Coordinator\PaymentCoordinator;
-use VendingMachine\Item\ItemB;
 use VendingMachine\Item\ItemsInSale;
 use VendingMachine\Repository\ItemRepository;
 use VendingMachine\Request\BuyItemRequest;
@@ -32,6 +31,7 @@ final class VendingMachine
     public function execute(string $input): Response
     {
         $request = $this->parseInput($input);
+
 
         if (preg_match("/GET-[" . implode('|', ItemsInSale::itemShortCodes()). "]/", $input)) {
             return $this->executeBuy($request);

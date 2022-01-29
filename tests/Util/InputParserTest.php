@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Tests\Util;
 
 use PHPUnit\Framework\TestCase;
-use VendingMachine\Model\Dollar;
 use VendingMachine\Model\Nickel;
 use VendingMachine\Model\Quarter;
 use VendingMachine\Request\ConsoleRequest;
@@ -49,6 +48,8 @@ class InputParserTest extends TestCase
     }
 
     /**
+     * @param string $input
+     * @param array $output
      * @return void
      * @dataProvider dataSetForParsingMoney
      */
@@ -80,7 +81,6 @@ class InputParserTest extends TestCase
                 'input' => 'N, GET-B',
                 'output' => [new Nickel()]
             ]
-
         ];
     }
 }

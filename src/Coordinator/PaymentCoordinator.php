@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace VendingMachine\Coordinator;
 
 use VendingMachine\Model\AvailableMoney;
-use VendingMachine\Model\Coin;
 use VendingMachine\Model\Money;
 use VendingMachine\Model\MoneyCollection;
 
@@ -15,10 +14,11 @@ class PaymentCoordinator
     {
         if ($input >= $cost) {
             $rest = $input - $cost;
-            $coinRest = $this->calculateRest($rest, $this->getCoins());
-            return new MoneyCollection($coinRest);
+
+            return new MoneyCollection(
+                $this->calculateRest($rest, AvailableMoney::getCoins())
+            );
         }
-        // add domain exception with information about passed values
         throw new \InvalidArgumentException('No enough money to pay for it!');
     }
 
@@ -44,17 +44,5 @@ class PaymentCoordinator
         }
 
         return $coinRest;
-    }
-
-    private function getCoins(): array
-    {
-        $coins = AvailableMoney::coins();
-
-        // sort DESC
-        usort($coins, static function (Money $a, Money $b) {
-            return ($a->value() > $b->value()) ? -1 : 1;
-        });
-
-        return $coins;
     }
 }

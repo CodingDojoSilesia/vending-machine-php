@@ -24,4 +24,16 @@ final class AvailableMoney
             new Quarter(),
         ];
     }
+
+    public static function getCoins(): array
+    {
+        $coins = self::coins();
+
+        // sort DESC
+        usort($coins, static function (Money $a, Money $b) {
+            return ($a->value() > $b->value()) ? -1 : 1;
+        });
+
+        return $coins;
+    }
 }
