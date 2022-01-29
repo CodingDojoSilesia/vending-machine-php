@@ -19,6 +19,6 @@ class CoinReturnCommandTest extends TestCase
 
         $result = $command->execute(new CoinReturnRequest($moneyCollection));
 
-        self::assertEquals('D, DOLLAR', $result->result());
+        self::assertEquals('D, DOLLAR', $result);
     }
 }

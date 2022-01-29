@@ -7,7 +7,7 @@ namespace VendingMachine\Response;
 use VendingMachine\Item\Item;
 use VendingMachine\Model\MoneyCollection;
 
-class ConsoleResponse implements Response
+class ConsoleResponse extends Response
 {
     private Item $product;
 
@@ -29,7 +29,15 @@ class ConsoleResponse implements Response
         $this->product = $product;
     }
 
-    public function result(): string
+    public function result(): array
+    {
+        return [
+            "product" => $this->product,
+            "rest"    => $this->rest
+        ];
+    }
+
+    public function __toString(): string
     {
         return implode(', ', array: [$this->product->selector(), ...$this->rest->toArray()]);
     }

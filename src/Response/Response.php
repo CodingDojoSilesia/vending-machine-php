@@ -2,7 +2,7 @@
 
 namespace VendingMachine\Response;
 
-interface Response
+abstract class Response implements \Stringable
 {
-    public function result(): string;
+    abstract public function result(): mixed;
 }

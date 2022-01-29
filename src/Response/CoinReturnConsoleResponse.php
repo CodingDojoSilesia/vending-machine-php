@@ -5,13 +5,18 @@ namespace VendingMachine\Response;
 use VendingMachine\Model\Money;
 use VendingMachine\Model\MoneyCollection;
 
-class CoinReturnConsoleResponse implements Response
+class CoinReturnConsoleResponse extends Response
 {
     public function __construct(private MoneyCollection $moneyCollection)
     {
     }
 
-    public function result(): string
+    public function result(): MoneyCollection
+    {
+        return $this->moneyCollection;
+    }
+
+    public function __toString()
     {
         return implode(
             ', ',
