@@ -23,7 +23,7 @@ class BuyItemCommandTest extends TestCase
 
         $buyItemCommand = new BuyItemCommand($itemRepository, new PaymentCoordinator(), new ConsoleResponse());
 
-        $result = $buyItemCommand->execute(
+        $result = $buyItemCommand(
             new BuyItemRequest('B', new MoneyCollection([new Dollar()]))
         );
 
@@ -37,7 +37,7 @@ class BuyItemCommandTest extends TestCase
 
         $buyItemCommand = new BuyItemCommand($itemRepository, new PaymentCoordinator(), new ConsoleResponse());
 
-        $result = $buyItemCommand->execute(
+        $result = $buyItemCommand(
             new BuyItemRequest('B', new MoneyCollection([new Dollar()]))
         );
 

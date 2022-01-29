@@ -53,14 +53,14 @@ final class VendingMachine
     {
         $buyCommand = new BuyItemCommand($this->itemRepository, new PaymentCoordinator(), new ConsoleResponse());
         // get item from input and parse it
-        return $buyCommand->execute(
+        return $buyCommand(
             new BuyItemRequest($request->productShortCode(), $request->moneyCollection())
         );
     }
 
     private function executeCoinReturn(ConsoleRequest $request): Response
     {
-        return (new CoinReturnCommand())->execute(
+        return (new CoinReturnCommand())(
             new CoinReturnRequest($request->moneyCollection())
         );
     }
