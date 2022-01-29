@@ -32,7 +32,7 @@ class ConsoleInputParser implements InputParser
     {
         $request = explode(',', $input);
 
-        return array_map(static function($element) {
+        return array_map(static function ($element) {
             return trim($element);
         }, $request);
     }
@@ -48,7 +48,9 @@ class ConsoleInputParser implements InputParser
             }
         }
 
-        if (!$action) throw new \LogicException(sprintf('No action found for %s', ...$parameters));
+        if (!$action) {
+            throw new \LogicException(sprintf('No action found for %s', ...$parameters));
+        }
 
         return $action;
     }
@@ -58,14 +60,13 @@ class ConsoleInputParser implements InputParser
         $money = [];
         /** @var string $parameter */
         foreach ($parameters as $parameter) {
-            $results = array_filter(AvailableMoney::getMoney(), static function(Money $money) use ($parameter) {
+            $results = array_filter(AvailableMoney::getMoney(), static function (Money $money) use ($parameter) {
                 return $money->shortCode() === $parameter;
             });
 
             if (count($results) === 1) {
                 $money[] = reset($results);
             }
-
         }
 
         if (empty($money)) {
@@ -79,5 +80,4 @@ class ConsoleInputParser implements InputParser
     {
         return explode('-', $action)[1];
     }
-
 }

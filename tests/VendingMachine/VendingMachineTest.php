@@ -75,4 +75,21 @@ final class VendingMachineTest extends TestCase
         $vendingMachine->execute('Q, Q, Q, Q, GET-B');
     }
 
+    public function testShouldOrderUsingDollarAndGetRestWithOutExactChange(): void
+    {
+        $repository = new InMemoryItemRepository();
+        $repository->add(new ItemA());
+
+        $vendingMachine = new VendingMachine($repository, new ConsoleInputParser());
+
+        $response = $vendingMachine->execute('DOLLAR, GET-A');
+
+        self::assertEquals(35, $response->rest()->count());
+        self::assertEquals([
+            new Quarter(),
+            new Dime(),
+        ], $response->rest()->money());
+        self::assertEquals('A', $response->getOutput());
+    }
+
 }
