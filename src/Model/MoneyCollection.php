@@ -36,4 +36,9 @@ class MoneyCollection implements \Countable
 
         return $sum;
     }
+
+    public function toArray(): array
+    {
+        return array_map(static fn(Money $money) => $money->shortCode(), $this->money());
+    }
 }

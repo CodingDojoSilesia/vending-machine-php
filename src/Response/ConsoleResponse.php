@@ -31,6 +31,6 @@ class ConsoleResponse implements Response
 
     public function getOutput(): string
     {
-        return $this->product->selector();
+        return implode(', ', array: [$this->product->selector(), ...$this->rest->toArray()]);
     }
 }

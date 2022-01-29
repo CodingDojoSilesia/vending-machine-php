@@ -60,7 +60,7 @@ final class VendingMachineTest extends TestCase
             new Quarter(),
             new Dime(),
         ], $response->rest()->money());
-        self::assertEquals('A', $response->getOutput());
+        self::assertEquals('A, Q, D', $response->getOutput());
     }
 
     public function testShouldThrowExceptionWhileOrderingProductIsNotAvailable(): void
@@ -89,7 +89,7 @@ final class VendingMachineTest extends TestCase
             new Quarter(),
             new Dime(),
         ], $response->rest()->money());
-        self::assertEquals('A', $response->getOutput());
+        self::assertEquals('A, Q, D', $response->getOutput());
     }
 
     public function testShouldReturnInsertedCoinsOnCoinReturn(): void
