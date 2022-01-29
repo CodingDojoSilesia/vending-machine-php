@@ -30,19 +30,27 @@ final class VendingMachine
         $request = $this->parseInput($input);
 
         if (preg_match('/GET-[A-C]/', $input)) {
-            $buyCommand = new BuyItemCommand($this->itemRepository, new PaymentCoordinator(), new ConsoleResponse());
-            // get item from input and parse it
-            return $buyCommand->execute(
-                new BuyItemRequest($request->productShortCode(), $request->moneyCollection())
-            );
+            return $this->executeBuy($request);
         }
-
         throw new \RuntimeException('Vending machine has error. Try again, please.');
-
     }
 
     private function parseInput(string $input): ConsoleRequest
     {
         return $this->inputParser->parse($input);
     }
+
+    /**
+     * @param ConsoleRequest $request
+     * @return ConsoleResponse
+     */
+    private function executeBuy(ConsoleRequest $request): ConsoleResponse
+    {
+        $buyCommand = new BuyItemCommand($this->itemRepository, new PaymentCoordinator(), new ConsoleResponse());
+        // get item from input and parse it
+        return $buyCommand->execute(
+            new BuyItemRequest($request->productShortCode(), $request->moneyCollection())
+        );
+    }
+
 }
