@@ -11,7 +11,7 @@ class CoinReturnConsoleResponse implements Response
     {
     }
 
-    public function getOutput(): string
+    public function result(): string
     {
         return implode(
             ', ',

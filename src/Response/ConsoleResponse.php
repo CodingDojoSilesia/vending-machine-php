@@ -29,7 +29,7 @@ class ConsoleResponse implements Response
         $this->product = $product;
     }
 
-    public function getOutput(): string
+    public function result(): string
     {
         return implode(', ', array: [$this->product->selector(), ...$this->rest->toArray()]);
     }

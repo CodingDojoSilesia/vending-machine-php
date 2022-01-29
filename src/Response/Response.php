@@ -4,5 +4,5 @@ namespace VendingMachine\Response;
 
 interface Response
 {
-    public function getOutput(): string;
+    public function result(): string;
 }
