@@ -21,5 +21,9 @@
             "VendingMachine\\": "src/",
             "Tests\\": "tests/"
         }
+    },
+    "scripts": {
+        "code-quality": "php ./vendor/bin/phpcs"
     }
+
 }

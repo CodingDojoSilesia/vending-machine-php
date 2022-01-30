@@ -18,7 +18,7 @@ class InMemoryItemRepository implements ItemRepository
 
     public function getItemBySelector(string $selector): ?Item
     {
-        $filtered = array_filter($this->items, static function(Item $item) use ($selector) {
+        $filtered = array_filter($this->items, static function (Item $item) use ($selector) {
             return $item->selector() === $selector;
         });
 
