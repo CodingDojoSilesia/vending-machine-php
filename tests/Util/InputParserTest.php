@@ -67,19 +67,19 @@ class InputParserTest extends TestCase
             [
                 'input' => 'Q, Q, Q, Q, GET-B',
                 'output' => [
-                    new Quarter(),
-                    new Quarter(),
-                    new Quarter(),
-                    new Quarter(),
+                    Quarter::create(),
+                    Quarter::create(),
+                    Quarter::create(),
+                    Quarter::create(),
                 ],
             ],
             [
                 'input' => 'Q,  GET-B',
-                'output' => [new Quarter()]
+                'output' => [Quarter::create()]
             ],
             [
                 'input' => 'N, GET-B',
-                'output' => [new Nickel()]
+                'output' => [Nickel::create()]
             ]
         ];
     }

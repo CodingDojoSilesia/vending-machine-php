@@ -14,15 +14,15 @@ class MoneyCollectionTest extends TestCase
     {
         $moneyCollection = new MoneyCollection(
             [
-                new Quarter(),
-                new Quarter()
+                Quarter::create(),
+                Quarter::create(),
             ]
         );
 
         self::assertEquals(50, $moneyCollection->count());
         self::assertEquals([
-            new Quarter(),
-            new Quarter()
+            Quarter::create(),
+            Quarter::create()
         ], $moneyCollection->money());
     }
 }

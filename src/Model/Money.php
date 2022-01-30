@@ -6,9 +6,13 @@ namespace VendingMachine\Model;
 
 abstract class Money
 {
-    protected string $shortCode = '';
+    protected const SHORT_CODE = '';
 
-    protected int $value = 0;
+    protected const VALUE = 0;
+
+    public function __construct(protected string $shortCode, protected int $value)
+    {
+    }
 
     public function shortCode(): string
     {
@@ -18,10 +22,5 @@ abstract class Money
     public function value(): int
     {
         return $this->value;
-    }
-
-    public function create(): Money
-    {
-        return new static();
     }
 }

@@ -57,8 +57,8 @@ final class VendingMachineTest extends TestCase
 
         self::assertEquals(35, $response->rest()->count());
         self::assertEquals([
-            new Quarter(),
-            new Dime(),
+            Quarter::create(),
+            Dime::create(),
         ], $response->rest()->money());
         self::assertEquals('A, Q, D', $response);
     }
@@ -86,8 +86,8 @@ final class VendingMachineTest extends TestCase
 
         self::assertEquals(35, $response->rest()->count());
         self::assertEquals([
-            new Quarter(),
-            new Dime(),
+            Quarter::create(),
+            Dime::create(),
         ], $response->rest()->money());
         self::assertEquals('A, Q, D', $response);
     }

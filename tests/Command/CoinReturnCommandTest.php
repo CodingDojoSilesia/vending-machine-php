@@ -13,7 +13,7 @@ class CoinReturnCommandTest extends TestCase
 {
     public function testShouldReturnInsertedCoinsInRest(): void
     {
-        $moneyCollection = new MoneyCollection([new Dime(), new Dollar()]);
+        $moneyCollection = new MoneyCollection([Dime::create(), Dollar::create()]);
 
         $command = new CoinReturnCommand();
 

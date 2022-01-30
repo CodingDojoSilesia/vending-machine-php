@@ -9,19 +9,19 @@ final class AvailableMoney
     public static function getMoney(): array
     {
         return [
-            new Nickel(),
-            new Dime(),
-            new Quarter(),
-            new Dollar()
+            Nickel::create(),
+            Dime::create(),
+            Quarter::create(),
+            Dollar::create()
         ];
     }
 
     public static function coins()
     {
         return [
-            new Nickel(),
-            new Dime(),
-            new Quarter(),
+            Nickel::create(),
+            Dime::create(),
+            Quarter::create(),
         ];
     }
 

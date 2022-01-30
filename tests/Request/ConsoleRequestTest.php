@@ -40,8 +40,8 @@ class ConsoleRequestTest extends TestCase
     public function testShouldAddMoneyToRequest(): void
     {
         $consoleRequest = new ConsoleRequest('GET-B');
-        $consoleRequest->addMoney(new Dime());
+        $consoleRequest->addMoney(Dime::create());
 
-        self::assertEquals([new Dime()], $consoleRequest->money());
+        self::assertEquals([Dime::create()], $consoleRequest->money());
     }
 }

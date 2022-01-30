@@ -34,8 +34,8 @@ class PaymentCoordinatorTest extends TestCase
         self::assertEquals(50, $rest->count());
         self::assertEquals(
             [
-                new Quarter(),
-                new Quarter()
+                Quarter::create(),
+                Quarter::create()
             ],
             $rest->money()
         );
@@ -48,8 +48,8 @@ class PaymentCoordinatorTest extends TestCase
         self::assertEquals(20, $rest->count());
         self::assertEquals(
             [
-                new Dime(),
-                new Dime()
+                Dime::create(),
+                Dime::create()
             ],
             $rest->money()
         );
@@ -62,8 +62,8 @@ class PaymentCoordinatorTest extends TestCase
         self::assertEquals(35, $rest->count());
         self::assertEquals(
             [
-                new Quarter(),
-                new Dime()
+                Quarter::create(),
+                Dime::create()
             ],
             $rest->money()
         );

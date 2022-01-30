@@ -6,7 +6,12 @@ namespace VendingMachine\Model;
 
 class Quarter extends Money implements Coin
 {
-    protected string $shortCode = 'Q';
+    protected const SHORT_CODE  = 'Q';
 
-    protected int $value = 25;
+    protected const VALUE = 25;
+
+    public static function create(): Quarter
+    {
+        return new Quarter(self::SHORT_CODE, self::VALUE);
+    }
 }

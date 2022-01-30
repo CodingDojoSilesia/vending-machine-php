@@ -22,6 +22,10 @@ class PaymentCoordinator
         throw new \InvalidArgumentException('No enough money to pay for it!');
     }
 
+    /**
+     * @param array<Money> $coins
+     * @return array<Money>
+     */
     private function calculateRest(int $rest, array $coins): array
     {
         $coinRest = [];
