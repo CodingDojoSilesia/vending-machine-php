@@ -37,6 +37,8 @@ class BuyItemCommand
             );
         }
 
-        throw new \InvalidArgumentException(sprintf("Set enough money to buy Item! Item costs %s, but you put in %s", $availableItem->value(), $moneys->count()));
+        throw new \InvalidArgumentException(
+            sprintf("Set enough money to buy Item! Needed %s put: %s", $availableItem->value(), $moneys->count())
+        );
     }
 }

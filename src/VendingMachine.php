@@ -28,7 +28,7 @@ final class VendingMachine
         $this->inputParser = $inputParser;
     }
 
-    public function execute(string $input): Response
+    public function execute(string $input): Response|ConsoleRequest
     {
         $request = $this->parseInput($input);
 
