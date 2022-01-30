@@ -6,6 +6,10 @@ namespace VendingMachine\Model;
 
 abstract class Money
 {
+    protected string $shortCode = '';
+
+    protected int $value = 0;
+
     public function shortCode(): string
     {
         return $this->shortCode;
