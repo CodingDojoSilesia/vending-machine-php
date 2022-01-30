@@ -1,0 +1,24 @@
+<?php declare(strict_types=1);
+
+namespace Tests\Command;
+
+use PHPUnit\Framework\TestCase;
+use VendingMachine\Command\CoinReturnCommand;
+use VendingMachine\Model\Dime;
+use VendingMachine\Model\Dollar;
+use VendingMachine\Model\MoneyCollection;
+use VendingMachine\Request\CoinReturnRequest;
+
+class CoinReturnCommandTest extends TestCase
+{
+    public function testShouldReturnInsertedCoinsInRest(): void
+    {
+        $moneyCollection = new MoneyCollection([Dime::create(), Dollar::create()]);
+
+        $command = new CoinReturnCommand();
+
+        $result = $command(new CoinReturnRequest($moneyCollection));
+
+        self::assertEquals('D, DOLLAR', $result);
+    }
+}

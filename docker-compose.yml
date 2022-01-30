@@ -1,0 +1,10 @@
+version: "3.7"
+services:
+  vending_machine:
+    build: .
+    container_name: vending_machine
+    volumes:
+        - .:/app
+        - ./vendor:/app/vendor
+    environment:
+        - PHP_IDE_CONFIG=serverName=vending_machine
